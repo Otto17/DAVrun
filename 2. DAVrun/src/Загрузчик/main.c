@@ -6,7 +6,7 @@
 
 	Copyright (c) 2024 Otto
 	Автор: Otto
-	Версия: 20.06.24
+	Версия: 04.07.24
 	GitHub страница:  https://github.com/Otto17/DAVrun
 	GitFlic страница: https://gitflic.ru/project/otto/davrun
 
@@ -36,20 +36,24 @@
 
 
 //Подключенные библиотеки
-#include <stdio.h>		// Библиотека для определения функций и работы с потоками ввода/вывода
-#include <stdlib.h>		// Библиотека предоставляет функции для управления памятью
-#include <Windows.h>	// Библиотека, которая предоставляет доступ к API Windows
-#include <shellapi.h>   // Библиотека для взаимодействия с оболочкой Windows (Shell), используется в данном случае для "ShellExecuteEx()"
-#include <curl/curl.h>  // Библиотека для работы с libcurl
-#include <sys/stat.h>   // Библиотека для работы с информацией о файлах и структурами данных, связанными с FS
-#include <direct.h>     // Библиотека для работы с файлами и папками FS
-#include <time.h>       // Библиотека для работы со временем и датой
-#include <string.h>     // Библиотека для работы со строками
-#include <stdbool.h>    // Библиотека для возможности использования bool
-#include <wincrypt.h>   // Библиотека для работы с криптографией на Windows
+#include <stdio.h>		        // Библиотека для определения функций и работы с потоками ввода/вывода
+#include <stdlib.h>		        // Библиотека предоставляет функции для управления памятью
+#include <Windows.h>	        // Библиотека, которая предоставляет доступ к API Windows
+#include <shellapi.h>           // Библиотека для взаимодействия с оболочкой Windows (Shell), используется в данном случае для "ShellExecuteEx()"
+#include <curl/curl.h>          // Библиотека для работы с libcurl
+#include <sys/stat.h>           // Библиотека для работы с информацией о файлах и структурами данных, связанными с FS
+#include <direct.h>             // Библиотека для работы с файлами и папками FS
+#include <time.h>               // Библиотека для работы со временем и датой
+#include <string.h>             // Библиотека для работы со строками
+#include <stdbool.h>            // Библиотека для возможности использования bool
+#include <wincrypt.h>           // Библиотека для работы с криптографией на Windows
+#include <libxml/parser.h>      // Библиотека для работы с XML-парсингом. Позволяет разбирать XML-документы и работать с их структурой
+#include <libxml/tree.h>        // Библиотека специализируется на работе с древовидными структурами XML. Предоставляет функционал для работы с деревьями DOM-структур XML-документов
+#include <unicode/ustdio.h>     // Библиотека обеспечивающая поддержку Unicode форматов при вводе и выводе данных
+#include <unicode/ustring.h>    // Библиотека для работы с строками в формате Unicode
 
 
-#pragma comment(lib, "Crypt32.lib") // Указываем компилятору, что бы добавил библиотеку "Crypt32.lib" в список библиотек, которые нужно связать с исполняемым файлом
+#pragma comment(lib, "Crypt32.lib") // Указываем компилятору, что бы добавил библиотеку "Crypt32.lib" в список библиотек, которые нужно связать с исполняемым файлом (для вычисления хеш-суммы)
 
 
 //Заглушка
@@ -196,168 +200,7 @@ char* getNamePC () {
 }
 
 
-//Пустая функция, чтобы игнорировать вывод данных xml от libcurl (да бы не срать в командную строку лишней информацией)
-size_t write_callback(void* ptr, size_t size, size_t nmemb, void* userdata) {   // Принимает указатель на данные, их размер, кол-во элементов и указатель на пользовательские данные
-    (void)ptr; (void)userdata;  // Используем (void) для игнорирования переменных "ptr" и "userdata", которые в данной функции не используются
-    return size * nmemb;        // Возвращаем произведение "size" на "nmemb" как результат работы функции
-}
-
-
-//Функция для поиска на сервере файла с таким же именем компьютера, как у ПК, на котором запущена данная программа
-int checkWebDavFile(const char* host, const char* username, const char* passwd, const char* curlCrt, const char* pointsDirectory, const char* pointsName) {
-    CURL* curl;         // Инициализируем указатель на объект типа "CURL"
-    CURLcode res;       // Инициализируем переменную типа "CURLcode" для хранения результата выполнения библиотеки libcurl
-    long http_code = 0; // Инициализируем переменную "http_code" для хранения кода ответа HTTP
-
-    curl_global_init(CURL_GLOBAL_DEFAULT);  // Инициализируем глобальное состояние библиотеки libcurl
-    curl = curl_easy_init();                // Инициализируем указатель "curl" для работы с запросами
-
-    if(curl) {          // Проверяем, что указатель "curl" не равен NULL
-        char url[512];  // Символический массив в 512 элементов (с запасом) для хранения строки с URL-адресом
-
-        snprintf(url, sizeof(url), "%s%s/%s", host, pointsDirectory, pointsName);   // Формируем строку с URL-адресом до файла, который будем искать
-
-        //Открывается файл "NUL" для записи информации в никуда (что бы не получать в окно терминала мусорный xml вывод)
-        FILE* devnull = fopen("NUL", "w");  // Открываем файл  "NUL" для записи
-        if (!devnull) {                     // Проверка на успешное открытие файла
-            writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Ошибка открытия файла \"NUL\" на запись, при проверке файла с WebDAV.\n"); // Пишем в лог
-
-            curl_easy_cleanup(curl);    // Освобождаем ресурсы указателя "curl"
-            curl_global_cleanup();      // Очищаем глобальное состояние библиотеки libcurl
-            return 1;   // Возвращаем единицу, после вывода ошибки и завершаем работу функции
-        }
-
-        //Устанавливаем опции
-        curl_easy_setopt(curl, CURLOPT_URL, url);                       // Устанавливаем сформированный URL-адрес для проверки 
-        curl_easy_setopt(curl, CURLOPT_HTTPAUTH, CURLAUTH_DIGEST);      // Аутентификация посредством дайджеста
-        curl_easy_setopt(curl, CURLOPT_USERNAME, username);             // Логин
-        curl_easy_setopt(curl, CURLOPT_PASSWORD, passwd);               // Пароль
-        curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "PROPFIND");      // Определяем метод "PROPFIND" для HTTP запроса (т.е. будем искать файл по имени)
-        curl_easy_setopt(curl, CURLOPT_CAINFO, curlCrt);               // Путь к файлу сертификата
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);  // Отключение вывода xml данных в cmd, посредством перенаправления стандартного вывода в пустую функцию "write_callback"
-
-        res = curl_easy_perform(curl);  // Выполняем запрос с помощью libcurl, результат пишем в "res"
-
-        fclose(devnull);    // Закрываем файл "NULL"
-
-        if(res != CURLE_OK) {   // Если запрос не успешен
-            writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Ошибка выполнения запроса при проверке наличия файла с именем компьютера на сервере WebDAV.\n"); // Пишем в лог
-
-            curl_easy_cleanup(curl);    // Освобождаем ресурсы указателя "curl"
-            curl_global_cleanup();      // Очищаем глобальное состояние библиотеки libcurl
-            return 1;                   // Возвращаем единицу, после вывода ошибки и завершаем работу функции
-        }
-
-        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);    // Получаем код ответа HTTP
-
-        curl_easy_cleanup(curl);    // Освобождаем ресурсы указателя "curl"
-    }
-    curl_global_cleanup();  // Очищаем глобальное состояние библиотеки libcur
-
-    if(http_code == 207) {  // Проверяем код ответа HTTP. Если он равен 207 (Multi-Status), функция возвращает 0 (файл присутствует на сервере)
-        return 0; // Возвращаем нуль, если нашли нужный файл с именем
-    }
-
-    return 1; // Возвращаем единицу, если не нашли нужный файл с именем
-}
-
-
-//Функция проверки хеш-суммы установочного файла
-char* checkSHA256(const char *directory, const char *filename) {
-    static char hashString[65];
-    char filepath[MAX_PATH];
-    snprintf(filepath, MAX_PATH, "%s\\%s", directory, filename);
-
-    // Извлечение хеша из имени файла
-    char *underscorePos = strrchr(filename, '_');
-    if (!underscorePos) {
-        deleteFilesInFolder(PATH_DIR, false);
-        writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Ошибка извлечения хеша из имени файла, установочный файл удалён.\n");	// Пишем в лог
-        return NULL;
-    }
-
-    char originalFilename[MAX_PATH];
-    strncpy(originalFilename, filename, underscorePos - filename);
-    originalFilename[underscorePos - filename] = '\0';
-
-    char providedHash[65];
-    strncpy(providedHash, underscorePos + 1, sizeof(providedHash) - 1);
-    providedHash[sizeof(providedHash) - 1] = '\0';
-
-    // Переименование файла
-    char newFilePath[MAX_PATH];
-    snprintf(newFilePath, MAX_PATH, "%s\\%s", directory, originalFilename);
-    if (rename(filepath, newFilePath) != 0) {
-        deleteFilesInFolder(PATH_DIR, false);
-        writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Ошибка переименования установочного файла, установочный файл удалён.\n");	// Пишем в лог
-        return NULL;
-    }
-
-    // Вычисление SHA-256 хеша переименованного файла
-    HCRYPTPROV hProv = 0;
-    HCRYPTHASH hHash = 0;
-    BYTE hash[32];
-    DWORD hashLen = 32;
-    DWORD bytesRead;
-    BYTE buffer[1024];
-    HANDLE file = CreateFileA(newFilePath, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-
-    if (file == INVALID_HANDLE_VALUE) {
-        writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Не удалось открыть файл для вычисления хеша.\n");	// Пишем в лог
-        return NULL;
-    }
-
-    if (!CryptAcquireContext(&hProv, NULL, NULL, PROV_RSA_AES, CRYPT_VERIFYCONTEXT)) {
-        CloseHandle(file);
-        writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Не удалось получить доступ к криптопровайдеру.\n");	// Пишем в лог
-        return NULL;
-    }
-
-    if (!CryptCreateHash(hProv, CALG_SHA_256, 0, 0, &hHash)) {
-        CryptReleaseContext(hProv, 0);
-        CloseHandle(file);
-        writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Не удалось создать хеш-объект для алгоритма SHA-256.\n");	// Пишем в лог
-        return NULL;
-    }
-
-    while (ReadFile(file, buffer, sizeof(buffer), &bytesRead, NULL) && bytesRead != 0) {
-        if (!CryptHashData(hHash, buffer, bytesRead, 0)) {
-            CryptDestroyHash(hHash);
-            CryptReleaseContext(hProv, 0);
-            CloseHandle(file);
-            writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Не удалось добавить данные из буфера в хеш-объект при чтении файла (по частям).\n");	// Пишем в лог
-            return NULL;
-        }
-    }
-
-    if (CryptGetHashParam(hHash, HP_HASHVAL, hash, &hashLen, 0)) {
-        for (DWORD i = 0; i < hashLen; i++) {
-            snprintf(hashString + (i * 2), sizeof(hashString) - (i * 2), "%02x", hash[i]);
-        }
-    } else {
-        CryptDestroyHash(hHash);
-        CryptReleaseContext(hProv, 0);
-        CloseHandle(file);
-        writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Не удалось получить вычисленные значения хеш-суммы из хеш-объекта.\n");	// Пишем в лог
-        return NULL;
-    }
-
-    CryptDestroyHash(hHash);
-    CryptReleaseContext(hProv, 0);
-    CloseHandle(file);
-
-    // Сравнение хеш-сумм
-    if (strncmp(providedHash, hashString, sizeof(providedHash) - 1) != 0) {
-        deleteFilesInFolder(PATH_DIR, false);
-        writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Хеш-сумма установочного файла не совпадает, установочный файл удалён.\n");	// Пишем в лог
-        return NULL;
-    }
-
-    return hashString;
-}
-
-
-//Определяем структуру для работы с памятью
+//Структура для работы с памятью
 struct MemoryStruct {
     char *memory;   // Указатель на память
     size_t size;    // Размер области памяти
@@ -366,11 +209,11 @@ struct MemoryStruct {
 
 //Функция для записи данных в память
 static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, void *userp) { // Принимает указатель на данные, их размер, количество и указатель на пользовательскую структуру
-    size_t realsize = size * nmemb;                             // Вычисляем реальный размер данных через переумножения размера и количества
-    struct MemoryStruct *mem = (struct MemoryStruct *)userp;    // Преобразуется указатель "userp" в указатель на структуру "MemoryStruct"
+    size_t realsize = size * nmemb;                             // Вычисляем реальный размер данных через перемножения размера и количества
+    struct MemoryStruct *mem = (struct MemoryStruct *)userp;    // Преобразуется указатель "userp" в указатель на структуру "findSetupFile_MemoryStruct"
 
-    char *ptr = realloc(mem->memory, mem->size + realsize + 1); // Выделяем память для новой порции данных плюс уже имеющихся данных в структуре MemoryStruct
-    if (ptr == NULL) {  // Проверяем, была ли память успешно выделена. Если указатель "ptr" равен "NULL"
+    char *ptr = realloc(mem->memory, mem->size + realsize + 1); // Выделяем память для новой порции данных плюс уже имеющихся данных в структуре findSetupFile_MemoryStruct
+    if (ptr == NULL) {                                          // Проверяем, была ли память успешно выделена. Если указатель "ptr" равен "NULL"
         writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Ошибка выделения памяти, освободите ресурсы ОЗУ.\n"); // Пишем в лог
         return 0;   // Возвращаем 0 (означает ошибку, вероятно не хватает памяти для выделения)
     }
@@ -381,6 +224,261 @@ static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, voi
     mem->memory[mem->size] = 0;                             // Ставим 0 в ячейке памяти после последнего скопированного символа
 
     return realsize;    // Возвращаем реальный размер данных
+}
+
+
+//Функция для декодирования URL-кодированной строки в UTF-8
+void urlDecode(char *dst, const char *src) {    // Принимает указатель на массив символов "*dst" и константный указатель на массив символов "*src"
+    char a, b;
+    while (*src) {              // Крутимся в цикле, пока указатель не укажет на конец строки
+        if ((*src == '%') &&    // Проверка условия, что текущий символ "*src" равен % и следующие два символа "src[1]" и "src[2]" существуют и являются шестнадцатеричными цифрами
+            ((a = src[1]) && (b = src[2])) &&
+            (isxdigit(a) && isxdigit(b))) {
+            if (a >= 'a') a -= 'a' - 'A';   // Преобразуем символы "a" и "b" к верхнему регистру
+            if (a >= 'A') a -= ('A' - 10);  // Преобразуем символы "a" и "b" из ASCII-кода в числовое значение
+            else a -= '0';
+            if (b >= 'a') b -= 'a' - 'A';
+            if (b >= 'A') b -= ('A' - 10);
+            else b -= '0';
+            *dst++ = 16 * a + b;   // Раскодирование символов "a" и "b" из формата URL-encoded в символ и записываем его в "*dst"
+            src += 3;              // Перемещаем указатель "src" на 3 символа вперед
+        } else {
+            *dst++ = *src++;    // В случае, если условие на шестнадцатеричные цифры не выполняется, копируем текущий символ из "*src" в "*dst" с инкрементацией на +1 "*src" и "*dst"
+        }
+    }
+    *dst++ = '\0';  // Добавляем завершающий ноль в коней строки
+}
+
+
+//Функция для преобразования строки в нижний регистр
+void toLowerCase(char *dst, const char *src) {  // Указателем на строку нижнего регистра "*dst" и константным указателем на строку исходного текста "*src"
+    UErrorCode status = U_ZERO_ERROR;           // Объявляем переменную "status" типа "UErrorCode" и присваиваем ей значение "U_ZERO_ERROR"
+    UChar uSrc[512];
+    UChar uDst[512];
+
+    //Конвертация UTF-8 в UTF-16
+    u_strFromUTF8(uSrc, 512, NULL, src, -1, &status);   // Передаём массив "uSrc" размером 512, указатель на исходную строку src, значение -1 для определения длины строки и переменная status для хранения статуса операции
+    if (U_FAILURE(status)) {    // Проверка конвертации
+       // fprintf(stderr, "Error in u_strFromUTF8: %s\n", u_errorName(status));
+        writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Ошибка конвертации UTF-8 в UTF-16.\n"); // Пишем в лог
+        return;
+    }
+
+    //Преобразование в нижний регистр
+    u_strToLower(uDst, 512, uSrc, -1, NULL, &status);
+    if (U_FAILURE(status)) {
+       // fprintf(stderr, "Error in u_strToLower: %s\n", u_errorName(status));
+        writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Ошибка преобразования в нижний регистр.\n"); // Пишем в лог
+        return;
+    }
+
+    //Конвертация UTF-16 обратно в UTF-8
+    u_strToUTF8(dst, 512, NULL, uDst, -1, &status);
+    if (U_FAILURE(status)) {
+        writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Ошибка конвертации UTF-16 в UTF-8.\n"); // Пишем в лог
+       // fprintf(stderr, "Error in u_strToUTF8: %s\n", u_errorName(status));
+        return;
+    }
+}
+
+
+//Функция для поиска файла по частичному совпадению
+char* checkWebDavFile(const char *host, const char *username, const char *passwd, const char *curlCrt, const char *pointsDirectory, const char *pointsName) {
+    CURL *curl;
+    CURLcode res;
+    struct MemoryStruct chunk;  // Структура для работы с памятью
+
+    chunk.memory = malloc(1);   // Начальная память для ответа
+    chunk.size = 0;             // Текущий размер ответа
+
+    curl_global_init(CURL_GLOBAL_DEFAULT);  // Инициализируем глобальное состояние библиотеки libcurl
+    curl = curl_easy_init();                // Инициализируем указатель "curl" для работы с запросами
+
+    if(curl) {          // Проверяем, что указатель "curl" не равен NULL
+        char url[512];  // Символический массив в 512 элементов (с запасом) для хранения строки с URL-адресом
+
+        snprintf(url, sizeof(url), "%s%s", host, pointsDirectory);  // Формируем строку с URL-адресом
+
+        curl_easy_setopt(curl, CURLOPT_URL, url);                           // Устанавливаем сформированный URL-адрес
+        curl_easy_setopt(curl, CURLOPT_HTTPAUTH, CURLAUTH_DIGEST);          // Аутентификация посредством дайджеста
+        curl_easy_setopt(curl, CURLOPT_USERNAME, username);                 // Логин
+        curl_easy_setopt(curl, CURLOPT_PASSWORD, passwd);                   // Пароль
+        curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "PROPFIND");          // Отправляем HTTP запрос методом "PROPFIND", для запроса свойств ресурса на сервере
+        curl_easy_setopt(curl, CURLOPT_CAINFO, curlCrt);                    // Путь к файлу сертификата
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteMemoryCallback); // Устанавливаем функцию обратного вызова для записи данных
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&chunk);          // Записываем результат запроса в структуру "chunk"
+        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);                 // Следование перенаправлениям
+
+        struct curl_slist *headers = NULL;                      // Создаём указатель на структуру "curl_slist" и инициализируем "NULL"
+        headers = curl_slist_append(headers, "Depth: 1");       // Добавляем заголовок "Depth: 1" в список заголовков
+        curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);    // Устанавливаем список заголовков "headers" для вызова "curl"
+
+        res = curl_easy_perform(curl);  // Выполняем запрос с помощью libcurl, результат пишем в "res"
+
+        if(res != CURLE_OK) {   // Если запрос не успешен
+            writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Ошибка выполнения функции \"curl_easy_perform()\" в \"checkWebDavFile()\".\n"); // Пишем в лог
+           // fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));   // Формируем сообщение
+        } else {
+            xmlDocPtr doc = xmlReadMemory(chunk.memory, chunk.size, "noname.xml", NULL, 0); // Создаём указатель на структуру "xmlDoc" и присваиваем ему значение, полученное в результате чтения XML-данных из памяти
+            if (doc == NULL) {  // Если указатель "doc" равен "NULL"
+                writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Ошибка, не удалось разобрать XML.\n"); // Пишем в лог
+               // fprintf(stderr, "Failed to parse XML\n");
+            } else {
+                xmlNode *root_element = xmlDocGetRootElement(doc);  // Создаём указатель на корневой элемент XML-документа
+                xmlNode *cur_node = NULL;
+                for (cur_node = root_element->children; cur_node; cur_node = cur_node->next) {                                  // Запускаем цикл перебора дочерних элементов корневого элемента
+                    if (cur_node->type == XML_ELEMENT_NODE && xmlStrcmp(cur_node->name, (const xmlChar *)"response") == 0) {    // Проверяем, является ли текущий узел элементом XML и имеет ли он имя "response"
+                        xmlNode *child_node = cur_node->children;                                                               // Получаем указатель на первый дочерний узел текущего узла
+                        
+                        while (child_node) {                                                                                            // Запускаем цикл перебора дочерних узлов текущего узла
+                            if (child_node->type == XML_ELEMENT_NODE && xmlStrcmp(child_node->name, (const xmlChar *)"href") == 0) {    // Проверяем, является ли текущий дочерний узел элементом XML и имеет ли он имя "href"
+                                xmlChar *content = xmlNodeGetContent(child_node);                                                       // Получаем содержимое текущего дочернего узла
+                               
+                                if (content) {
+                                    char decoded_filename[512];
+                                    urlDecode(decoded_filename, (const char *)content); // Если содержимое существует, декодируем его и находим имя файла
+                                    char *filename = strrchr(decoded_filename, '/');    // Ищем последнее вхождение символа '/' в строке "decoded_filename" и возвращаем указатель на этот символ (или NULL, если символ не найден)
+                                    
+                                    //Сравниваем имя файла с именем точки "pointsName" после приведения обоих к нижнему регистру
+                                    if (filename) {
+                                        filename++; // Пропустить '/'
+                                        char lower_filename[512];
+                                        char lower_pointsName[512];
+                                        toLowerCase(lower_filename, filename);
+                                        toLowerCase(lower_pointsName, pointsName);
+
+                                        //Если имена файлов совпадают или содержат точное совпадение со значением "pointsName" после знака "=", то возвращаем имя файла
+                                        if (strcmp(lower_filename, lower_pointsName) == 0 ||
+                                            (strchr(lower_filename, '=') && strcmp(strchr(lower_filename, '=') + 1, lower_pointsName) == 0)) {
+                                            char *result = strdup(filename);
+                                            xmlFree(content);               // Освобождаем память XML
+                                            xmlFreeDoc(doc);                // Освобождаем память XML
+                                            curl_easy_cleanup(curl);        // Освобождаем ресурсы указателя "curl"
+                                            curl_global_cleanup();          // Очищаем глобальное состояние библиотеки libcurl
+                                            curl_slist_free_all(headers);   // Освобождаем ресурсы заголовка "headers"
+                                            free(chunk.memory);             // Освобождаем память
+                                            return result;                  // Возвращаем имя файла
+                                        }
+                                    }
+                                    xmlFree(content);   // Освобождаем память XML
+                                }
+                            }
+                            child_node = child_node->next;  // Передаём указатель на следующий узел после узла, на который указывает указатель "child_node"
+                        }
+                    }
+                }
+                xmlFreeDoc(doc);    // Освобождаем память XML
+            }
+        }
+        curl_easy_cleanup(curl);        // Освобождаем ресурсы указателя "curl"
+        curl_slist_free_all(headers);   // Освобождаем ресурсы заголовка "headers"
+    }
+
+    curl_global_cleanup();  // Очищаем глобальное состояние библиотеки libcurl
+    free(chunk.memory);     // Очищаем память
+
+    return "NULL"; // Возвращаем 'Файл не найден'
+}
+
+
+//Функция проверки хеш-суммы установочного файла
+char* checkSHA256(const char *directory, const char *filename) {
+    static char hashString[65];
+    char filepath[MAX_PATH];
+    snprintf(filepath, MAX_PATH, "%s\\%s", directory, filename);    // Записываем путь к файлу в массив "filepath"
+
+    //Извлечение хеша из имени файла
+    char *underscorePos = strrchr(filename, '_');   // Извлекаем позицию подчеркивания в имени файла с помощью функции "strrchr()"
+
+    //Если подчеркивание не найдено, тогда удаляем все файлы в каталоге
+    if (!underscorePos) {
+        deleteFilesInFolder(PATH_DIR, false);   // Путь до папки; true - удалять все файлы вместе с папкой, false - удалять только файлы внутри папки
+        writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Ошибка извлечения хеша из имени файла, установочный файл удалён.\n");	// Пишем в лог
+        return NULL;
+    }
+
+    //В массив "originalFilename" копируем подстроку имени файла до символа подчеркивания и добавляем завершающий символ
+    char originalFilename[MAX_PATH];
+    strncpy(originalFilename, filename, underscorePos - filename);
+    originalFilename[underscorePos - filename] = '\0';
+
+    //В массив "providedHash" копируем подстроку имени файла, начиная с символа после подчеркивания, с учетом размера "providedHash" и добавляем завершающий символ
+    char providedHash[65];
+    strncpy(providedHash, underscorePos + 1, sizeof(providedHash) - 1);
+    providedHash[sizeof(providedHash) - 1] = '\0';
+
+    //Переименование файла
+    char newFilePath[MAX_PATH];
+    snprintf(newFilePath, MAX_PATH, "%s\\%s", directory, originalFilename); // Формируем строку с новым именем файла
+
+    if (rename(filepath, newFilePath) != 0) {   // Если не смогли переименоватьфайл, тогда удаляем все файлы в каталоге
+        deleteFilesInFolder(PATH_DIR, false);   // Путь до папки; true - удалять все файлы вместе с папкой, false - удалять только файлы внутри папки
+        writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Ошибка переименования установочного файла, установочный файл удалён.\n");	// Пишем в лог
+        return NULL;
+    }
+
+    //Вычисление SHA-256 хеша переименованного файла
+    HCRYPTPROV hProv = 0;   // Создаём криптопровайдер "hProv"
+    HCRYPTHASH hHash = 0;   // Создаём хеш-объект "hHash" для алгоритма SHA-256
+    BYTE hash[32];
+    DWORD hashLen = 32;
+    DWORD bytesRead;
+    BYTE buffer[1024];
+    HANDLE file = CreateFileA(newFilePath, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);    // Открываем файл "file" для чтения в бинарном режиме
+
+    if (file == INVALID_HANDLE_VALUE) { // Если не смогли открыть файл
+        writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Не удалось открыть файл для вычисления хеша.\n");	// Пишем в лог
+        return NULL;
+    }
+
+    if (!CryptAcquireContext(&hProv, NULL, NULL, PROV_RSA_AES, CRYPT_VERIFYCONTEXT)) {  // Если не удалось получить доступ к криптопровайдеру
+        CloseHandle(file);                                                              // Закрываем файловый дескриптор (освобождаем память)
+        writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Не удалось получить доступ к криптопровайдеру.\n");	// Пишем в лог
+        return NULL;
+    }
+
+    if (!CryptCreateHash(hProv, CALG_SHA_256, 0, 0, &hHash)) {  // Если не удалось создать хеш-объект для алгоритма SHA-256
+        CryptReleaseContext(hProv, 0);                          // Освобождаем память криптопровайдера
+        CloseHandle(file);                                      // Закрываем файловый дескриптор (освобождаем память)
+        writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Не удалось создать хеш-объект для алгоритма SHA-256.\n");	// Пишем в лог
+        return NULL;
+    }
+
+    while (ReadFile(file, buffer, sizeof(buffer), &bytesRead, NULL) && bytesRead != 0) {    // Читаем файл по частям (1024 байта) и данные добавляем в хеш-объект "hHash"
+        if (!CryptHashData(hHash, buffer, bytesRead, 0)) {                                  // Если при чтении файла данные не удалось добавить в хеш-объект
+            CryptDestroyHash(hHash);                                                        // Освобождаем память хеш-объекта
+            CryptReleaseContext(hProv, 0);                                                  // Освобождаем память криптопровайдера
+            CloseHandle(file);                                                              // Закрываем файловый дескриптор (освобождаем память)
+            writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Не удалось добавить данные из буфера в хеш-объект при чтении файла (по частям).\n");	// Пишем в лог
+            return NULL;
+        }
+    }
+
+    //Получаем вычисленное значение хеш-суммы из хеш-объекта и записываем его в "hashString" в виде строки в формате SHA-256
+    if (CryptGetHashParam(hHash, HP_HASHVAL, hash, &hashLen, 0)) {
+        for (DWORD i = 0; i < hashLen; i++) {
+            snprintf(hashString + (i * 2), sizeof(hashString) - (i * 2), "%02x", hash[i]);
+        }
+    } else {
+        CryptDestroyHash(hHash);        // Освобождаем память хеш-объекта
+        CryptReleaseContext(hProv, 0);  // Освобождаем память криптопровайдера
+        CloseHandle(file);
+        writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Не удалось получить вычисленные значения хеш-суммы из хеш-объекта.\n");	// Пишем в лог
+        return NULL;
+    }
+
+    CryptDestroyHash(hHash);        // Освобождаем память хеш-объекта
+    CryptReleaseContext(hProv, 0);  // Освобождаем память криптопровайдера
+    CloseHandle(file);
+
+    //Сравниваем полученную хеш-сумму с предоставленной хеш-суммой
+    if (strncmp(providedHash, hashString, sizeof(providedHash) - 1) != 0) { // Если хеш-суммы не совпадают
+        deleteFilesInFolder(PATH_DIR, false);   // Путь до папки; true - удалять все файлы вместе с папкой, false - удалять только файлы внутри папки
+        writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Хеш-сумма установочного файла не совпадает, установочный файл удалён.\n");	// Пишем в лог
+        return NULL;
+    }
+
+    return hashString;  // Возвращаем строку с вычисленной хеш-суммой "hashString"
 }
 
 
@@ -411,7 +509,7 @@ char* findSetupFile(const char* host, const char* username, const char* passwd, 
 
         res = curl_easy_perform(curl);  // Выполняем запрос с помощью libcurl, результат пишем в "res"
 
-        if(res != CURLE_OK) {   // Если не запрос не успешен
+        if(res != CURLE_OK) {   // Если запрос не успешен
             writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Ошибка при выполнении запроса на скачивание установочного файла с сервера WebDAV.\n"); // Пишем в лог
 
             free(chunk.memory);         // Освобождаем память
@@ -420,8 +518,7 @@ char* findSetupFile(const char* host, const char* username, const char* passwd, 
             return NULL;                // Возвращаем нулевой указатель
         }
 
-        //Находим файл, начинающийся на "setup.exe_"
-        char* found = strstr(chunk.memory, "setup.exe_");
+        char* found = strstr(chunk.memory, "setup.exe_");   // Находим файл, начинающийся на "setup.exe_"
         
         if (found) {
             char* end = strstr(found, "\"");    // Находим символ "
@@ -514,35 +611,56 @@ int downloadFile(const char* host, const char* username, const char* passwd, con
 }
 
 
+//Пустая функция для подавления вывода тела ответа при удалении файла через функцию "delWebDavFile()"
+size_t WriteCallback(void *ptr, size_t size, size_t nmemb, void *stream) {
+    (void)ptr;              // Игнорируем данный параметр
+    (void)stream;           // Игнорируем данный параметр
+    return size * nmemb;    // Возвращает количество байтов записанных данных (размер * количество элементов)
+}
+
 //Функция удаления файла с именем компьютера с сервера
 void delWebDavFile(char* delName) {
-    CURL *curl;     // Инициализируем указатель на объект типа CURL
-    CURLcode res;   // Инициализируем переменную типа "CURLcode" для хранения результата выполнения библиотеки libcurl
-
-    char del_url[512]; // Символический массив в 512 элементов (с запасом) для хранения строки с URL-адресом
-    snprintf(del_url, sizeof(del_url), "%s%s/%s", HOST, POINTS_DIRECTORY, delName); // Формируем строку с URL-адресом до файла, который будем удалять
+    CURL *curl;         // Указатель на объект типа CURL
+    CURLcode res;       // Переменная типа "CURLcode" для хранения результата выполнения библиотеки libcurl
+    long http_code = 0; // Переменная для хранения кода HTTP
 
     curl_global_init(CURL_GLOBAL_DEFAULT);  // Инициализируем глобальное состояние библиотеки libcurl
     curl = curl_easy_init();                // Инициализируем указатель "curl" для работы с запросами
 
-    if(curl) {                              // Проверяем, что указатель "curl" не равен NULL
-        struct curl_slist *headers = NULL;  // Создаём список заголовков "headers" (это необходимо для корректной настройки HTTP запроса и передачи соответствующих заголовков серверу)
+    if(curl) {                                                  // Проверяем, что указатель "curl" не равен NULL
+        char *encodedName = curl_easy_escape(curl, delName, 0); // Используем "curl_easy_escape()" для правильного URL-кодирования
+        if(encodedName == NULL) {                               // Проверка на NULL
+            writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Ошибка, не удалось закодировать URL-адрес перед попыткой удаления файла с именем компьютера с сервера.\n"); // Пишем в лог
+            return; // Возвращаем управление вызывающей программе
+        }
+
+        char del_url[512];                                                                  // Символический массив в 512 элементов (с запасом) для хранения строки с URL-адресом
+        snprintf(del_url, sizeof(del_url), "%s%s/%s", HOST, POINTS_DIRECTORY, encodedName); // Формируем строку с URL-адресом до файла, который будем удалять
+
+        struct curl_slist *headers = NULL;                                                          // Создаём список заголовков "headers" (это необходимо для корректной настройки HTTP запроса и передачи соответствующих заголовков серверу)
         headers = curl_slist_append(headers, "Content-Type: application/x-www-form-urlencoded");    // Добавляем заголовок
 
         //Устанавливаем опции
-        curl_easy_setopt(curl, CURLOPT_URL, del_url);               // Устанавливаем сформированный URL-адрес для запроса
-        curl_easy_setopt(curl, CURLOPT_HTTPAUTH, CURLAUTH_DIGEST);  // Аутентификация посредством дайджеста
-        curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);        // Устанавливаем заголовки HTTP для запроса
-        curl_easy_setopt(curl, CURLOPT_USERNAME, USERNAME);         // Логин
-        curl_easy_setopt(curl, CURLOPT_PASSWORD, PASSWD);           // Пароль
-        curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "DELETE");    // Определяем метод "DELETE" для HTTP запроса (т.е. будем удалять с сервера)
-        curl_easy_setopt(curl, CURLOPT_CAINFO, CURL_CRT);           // Путь к файлу сертификата
+        curl_easy_setopt(curl, CURLOPT_URL, del_url);                   // Устанавливаем сформированный URL-адрес для запроса
+        curl_easy_setopt(curl, CURLOPT_HTTPAUTH, CURLAUTH_DIGEST);      // Аутентификация посредством дайджеста
+        curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);            // Устанавливаем заголовки HTTP для запроса
+        curl_easy_setopt(curl, CURLOPT_USERNAME, USERNAME);             // Логин
+        curl_easy_setopt(curl, CURLOPT_PASSWORD, PASSWD);               // Пароль
+        curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "DELETE");        // Определяем метод "DELETE" для HTTP запроса (т.е. будем удалять с сервера)
+        curl_easy_setopt(curl, CURLOPT_CAINFO, CURL_CRT);               // Путь к файлу сертификата
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);   // Подавляем вывод тела ответа
 
         res = curl_easy_perform(curl);  // Выполняем запрос с помощью libcurl, результат пишем в "res"
 
-       if(res != CURLE_OK) writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Ошибка при выполнении запроса на удаление файла с именем компьютера на сервере WebDAV.\n"); // Пишем в лог
-        //if(res != CURLE_OK) fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));   // Если не запрос не успешен, то выводим сообщение об ошибке
-    
+        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code); // Получаем код состояния HTTP
+
+        if(res != CURLE_OK) {   // Если запрос не успешен
+            fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));   // Формируем сообщение об ошибке
+        } else if (http_code == 404) {
+            writeToLogFile(PATH_LOG, "log_DAVrun.txt", "Ошибка 404, файл с именем компьютера для удаления не найден на сервере.\n"); // Пишем в лог
+        }
+
+        curl_free(encodedName);         // Освобождаем память, выделенную для закодированного имени файла
         curl_easy_cleanup(curl);        // Освобождаем ресурсы указателя "curl"
         curl_slist_free_all(headers);   // Освобождаем ресурсы заголовка "headers"
     }
@@ -599,14 +717,14 @@ int VerificationCycle() {
 
 int main() {
 	//Выполняем код в скрытом (фоновом) режиме
-	HWND hWnd = GetConsoleWindow();	// Получаем дескриптор окна консоли, связанного с текущим процессом
-	ShowWindow(hWnd, SW_HIDE);		// Скрываем окно консоли, дескриптора "hWnd"
+	 HWND hWnd = GetConsoleWindow();    // Получаем дескриптор окна консоли, связанного с текущим процессом
+	 ShowWindow(hWnd, SW_HIDE);		    // Скрываем окно консоли, дескриптора "hWnd"
 
-    char* namePC = getNamePC(); // Копируем имя компьютера в "namePC"
-    int resultName = checkWebDavFile(HOST, USERNAME, PASSWD, CURL_CRT, POINTS_DIRECTORY, namePC); // Ищем на сервере файл с таким же именем как у этого компьютера
+    char* namePC = getNamePC();                                                                     // Копируем имя компьютера в "namePC"
+    char* resultName = checkWebDavFile(HOST, USERNAME, PASSWD, CURL_CRT, POINTS_DIRECTORY, namePC); // Ищем на сервере файл с таким же именем как у этого компьютера
 
-    if(resultName == 0) {   // Если на сервере есть файл с таким же именем, как у этого компьютера
-        if (VerificationCycle() == 0) { // И если установочный файл успешно скачали и верифицировали
+    if(strcmp(resultName, "NULL") != 0) {   // Если на сервере есть файл с таким же именем, как у этого компьютера
+        if (VerificationCycle() == 0) {     // И если установочный файл успешно скачали и верифицировали
         
             //Запуск самораспаковывающегося архива с повышенными правами
             char fullPathSetup[MAX_PATH];                                               // Буфер для полного создания пути
@@ -646,18 +764,20 @@ int main() {
                 return 1;   // Возвращаем 1 в случае ошибки
             }
 
-            // Ожидание завершения процесса
+            //Ожидание завершения процесса
             if (sei.hProcess != NULL) {                         // Проверяем, успешен ли вызов "ShellExecuteEx()"
                 WaitForSingleObject(sei.hProcess, INFINITE);    // Если процесс успешно запущен и получен его хэндл, тогда ожидаем завершения процесса
                 CloseHandle(sei.hProcess);                      // Освобождаем ресурсы, связанные с хэндлом
             }
 
-            delWebDavFile(namePC);  // Если установка программы завершилась успешно, тогда удаляем с сервера файл с таким же именем, как у этого компьютера
+            delWebDavFile(resultName);  // Если установка программы завершилась успешно, тогда удаляем с сервера файл с таким же именем, как у этого компьютера
 
             //Удаление папки со всеми подкаталогами и установочным файлом
             if (DEL_DIR == TRUE) deleteFilesInFolder(PATH_DIR, true);	// Если флаг поднят, то выполняем функцию удаления папки с файлами
         }
     }
 
-    return 0;	// Возвращаем нуль из функции "main()", для обозначения успешного завершения работы программы
+    free(resultName);   // Освобождаем память
+
+    return 0;   // Возвращаем нуль из функции "main()", для обозначения успешного завершения работы программы
 }
