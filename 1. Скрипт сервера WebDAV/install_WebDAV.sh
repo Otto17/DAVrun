@@ -6,7 +6,7 @@
 
 # Copyright (c) 2024 Otto
 # Автор: Otto
-# Версия: 20.06.24
+# Версия: 29.06.24
 # GitHub страница:  https://github.com/Otto17/DAVrun
 # GitFlic страница: https://gitflic.ru/project/otto/davrun
 
@@ -320,5 +320,8 @@ ufw --force enable
 
 # Показываем статус UFW для наглядности
 ufw status
+
+# Очищаем локальный кеш от скаченных пакетов
+apt clean
 
 echo WebDAV сервер настроен и защищён!

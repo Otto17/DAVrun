@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\bak\\\u041F\u0440\u043E\u0435\u043A\u0442 DAVrun\\SERVICE-DAVrun\\",
+  "WorkspaceRootPath": "C:\\Users\\Otto\\Desktop\\\u041F\u0440\u043E\u0435\u043A\u0442 DAVrun\\3. SERVICE-DAVrun\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{092FD1D5-6317-47B0-849B-2948260833AE}|SERVICE-DAVrun\\SERVICE-DAVrun.csproj|D:\\bak\\\u041F\u0440\u043E\u0435\u043A\u0442 DAVrun\\SERVICE-DAVrun\\service-davrun\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{092FD1D5-6317-47B0-849B-2948260833AE}|SERVICE-DAVrun\\SERVICE-DAVrun.csproj|c:\\users\\otto\\desktop\\\u043F\u0440\u043E\u0435\u043A\u0442 davrun\\3. service-davrun\\service-davrun\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{092FD1D5-6317-47B0-849B-2948260833AE}|SERVICE-DAVrun\\SERVICE-DAVrun.csproj|solutionrelative:service-davrun\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{092FD1D5-6317-47B0-849B-2948260833AE}|SERVICE-DAVrun\\SERVICE-DAVrun.csproj|d:\\bak\\\u043F\u0440\u043E\u0435\u043A\u0442 davrun\\service-davrun\\service-davrun\\service1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{092FD1D5-6317-47B0-849B-2948260833AE}|SERVICE-DAVrun\\SERVICE-DAVrun.csproj|C:\\Users\\Otto\\Desktop\\\u041F\u0440\u043E\u0435\u043A\u0442 DAVrun\\3. SERVICE-DAVrun\\service-davrun\\service1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{092FD1D5-6317-47B0-849B-2948260833AE}|SERVICE-DAVrun\\SERVICE-DAVrun.csproj|solutionrelative:service-davrun\\service1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -18,15 +18,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Service1.cs",
-              "DocumentMoniker": "D:\\bak\\\u041F\u0440\u043E\u0435\u043A\u0442 DAVrun\\SERVICE-DAVrun\\SERVICE-DAVrun\\Service1.cs",
+              "DocumentMoniker": "C:\\Users\\Otto\\Desktop\\\u041F\u0440\u043E\u0435\u043A\u0442 DAVrun\\3. SERVICE-DAVrun\\SERVICE-DAVrun\\Service1.cs",
               "RelativeDocumentMoniker": "SERVICE-DAVrun\\Service1.cs",
-              "ToolTip": "D:\\bak\\\u041F\u0440\u043E\u0435\u043A\u0442 DAVrun\\SERVICE-DAVrun\\SERVICE-DAVrun\\Service1.cs",
+              "ToolTip": "C:\\Users\\Otto\\Desktop\\\u041F\u0440\u043E\u0435\u043A\u0442 DAVrun\\3. SERVICE-DAVrun\\SERVICE-DAVrun\\Service1.cs",
               "RelativeToolTip": "SERVICE-DAVrun\\Service1.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -37,9 +41,9 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "D:\\bak\\\u041F\u0440\u043E\u0435\u043A\u0442 DAVrun\\SERVICE-DAVrun\\SERVICE-DAVrun\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\Otto\\Desktop\\\u041F\u0440\u043E\u0435\u043A\u0442 DAVrun\\3. SERVICE-DAVrun\\SERVICE-DAVrun\\Program.cs",
               "RelativeDocumentMoniker": "SERVICE-DAVrun\\Program.cs",
-              "ToolTip": "D:\\bak\\\u041F\u0440\u043E\u0435\u043A\u0442 DAVrun\\SERVICE-DAVrun\\SERVICE-DAVrun\\Program.cs",
+              "ToolTip": "C:\\Users\\Otto\\Desktop\\\u041F\u0440\u043E\u0435\u043A\u0442 DAVrun\\3. SERVICE-DAVrun\\SERVICE-DAVrun\\Program.cs",
               "RelativeToolTip": "SERVICE-DAVrun\\Program.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",

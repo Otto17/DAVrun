@@ -1,4 +1,4 @@
-;Сценарий, установки программы "DAVrun" создан через Inno Setup v6.3.1
+;Сценарий, установки программы "DAVrun" создан через Inno Setup v6.3.2
 
 
 ;Данная программа является свободным программным обеспечением, распространяющимся по лицензии MIT.
@@ -6,28 +6,40 @@
 
 ;Copyright (c) 2024 Otto
 ;Автор: Otto
-;Версия: 20.06.24
+;Версия: 04.07.24
 ;GitHub страница:  https://github.com/Otto17/DAVrun
 ;GitFlic страница: https://gitflic.ru/project/otto/davrun
 
 ;г. Омск 2024
 
 
+// --------------------------- //
+
+//Ниже используется код скрипта "CodeDependencies.iss", я его урезал, и он использует только x64 архитектура, так же вырезаны все остальные установщики библиотек, кроме "Visual C++ 2015-2022 Redistributable".
+//Автор скрипта "CodeDependencies.iss" - "DomGries", ссылка на страницу автора "https://github.com/DomGries/InnoDependencyInstaller/tree/master".
+//Код скрипта "CodeDependencies.iss" распространяется по лицензии "The Code Project Open License (CPOL) 1.02".
+
+//ЕСЛИ ДАННАЯ ЛИЦЕНЗИЯ ВАМ НЕ ПОДХОДИТ, ТОГДА УДАЛИТЕ ЭТУ СТРОКУ ИЗ СКРИПТА:
+#include "CodeDependencies.iss"
+//И установите вручную "Visual C++ 2015-2022 Redistributable" по ссылке с официального сайта Microsoft: "https://learn.microsoft.com/ru-ru/cpp/windows/latest-supported-vc-redist?view=msvc-170"
+
+// --------------------------- //
+
 
 ; Имя приложения
 #define MyAppName "DAVrun"
 ; Версия приложения
-#define MyAppVersion "20.06.2024"
+#define MyAppVersion "04.07.2024"
 ;Издатель приложения
 #define MyAppPublisher "Otto"
 ; Место сохранения скомпилированного установочного фала
-#define MyFolderOutput "D:\build"
+#define MyFolderOutput "."
 ; Папка с файлами, которые будут собраны в установочном файле
-#define MySourceFile "D:\build\DAVrun\*"
+#define MySourceFile ".\build\DAVrun\*"
 ; Файл лицензии
-#define MyLicense "D:\build\DAVrun\LICENSE.txt"
+#define MyLicense ".\build\DAVrun\LICENSE.txt"
 ; Иконка установочного файла после компиляции
-#define MyIconSetupOutput "D:\build\icon_Setup.ico"
+#define MyIconSetupOutput ".\build\icon_Setup.ico"
 ; Имя файла установщика после компиляции
 #define MySetupOutput "Setup_DAVrun"
 ; Место куда будем устанавливать программу при запуске Setup файла
@@ -37,7 +49,7 @@
 [Setup]
 ; ПРИМЕЧАНИЕ: Значение AppID однозначно идентифицирует это приложение. Не используйте одно и то же значение AppID в установщиках для других приложений.
 ; ( Чтобы сгенерировать новый GUID, нажмите Tools |  Generate GUID в среде IDE )
-AppId={{7A5F84AE-20D3-4755-86DD-9C89B4B49B3D}
+AppId={{376CC014-D597-4CD1-8D42-B5FD55116B06}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppPublisher={#MyAppPublisher}
@@ -55,7 +67,7 @@ Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
 PrivilegesRequired=admin
-
+ArchitecturesInstallIn64BitMode=x64
 
 [Languages]
 ; Язык установщика
