@@ -121,18 +121,6 @@
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="подключитсяПоSSHToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 20</value>
-  </data>
-  <data name="подключитсяПоSSHToolStripMenuItem.Text" xml:space="preserve">
-    <value>Подключится по SSH</value>
-  </data>
-  <data name="оПрограммеToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 20</value>
-  </data>
-  <data name="оПрограммеToolStripMenuItem.Text" xml:space="preserve">
-    <value>О программе</value>
-  </data>
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -157,6 +145,18 @@
   </data>
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="подключитсяПоSSHToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 20</value>
+  </data>
+  <data name="подключитсяПоSSHToolStripMenuItem.Text" xml:space="preserve">
+    <value>Подключится по SSH</value>
+  </data>
+  <data name="оПрограммеToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 20</value>
+  </data>
+  <data name="оПрограммеToolStripMenuItem.Text" xml:space="preserve">
+    <value>О программе</value>
   </data>
   <data name="link.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -495,24 +495,485 @@
   <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="labelDrag.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14.25pt</value>
+  <data name="&gt;&gt;panelDrop.Name" xml:space="preserve">
+    <value>panelDrop</value>
   </data>
-  <data name="labelDrag.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 34</value>
+  <data name="&gt;&gt;panelDrop.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="labelDrag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>302, 51</value>
+  <data name="&gt;&gt;panelDrop.Parent" xml:space="preserve">
+    <value>LoadPanelFullGroup</value>
   </data>
-  <data name="labelDrag.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+  <data name="&gt;&gt;panelDrop.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="labelDrag.Text" xml:space="preserve">
-    <value>Перетащите файлы сюда
-или кликните в эту область</value>
+  <data name="&gt;&gt;btnDownlPCName.Name" xml:space="preserve">
+    <value>btnDownlPCName</value>
   </data>
-  <data name="labelDrag.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
+  <data name="&gt;&gt;btnDownlPCName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnDownlPCName.Parent" xml:space="preserve">
+    <value>LoadPanelFullGroup</value>
+  </data>
+  <data name="&gt;&gt;btnDownlPCName.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup7.Name" xml:space="preserve">
+    <value>LoadSubGroup7</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup7.Parent" xml:space="preserve">
+    <value>LoadPanelFullGroup</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup7.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup6.Name" xml:space="preserve">
+    <value>LoadSubGroup6</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup6.Parent" xml:space="preserve">
+    <value>LoadPanelFullGroup</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup6.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup5.Name" xml:space="preserve">
+    <value>LoadSubGroup5</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup5.Parent" xml:space="preserve">
+    <value>LoadPanelFullGroup</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup5.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup4.Name" xml:space="preserve">
+    <value>LoadSubGroup4</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup4.Parent" xml:space="preserve">
+    <value>LoadPanelFullGroup</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup4.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup3.Name" xml:space="preserve">
+    <value>LoadSubGroup3</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup3.Parent" xml:space="preserve">
+    <value>LoadPanelFullGroup</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup3.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup2.Name" xml:space="preserve">
+    <value>LoadSubGroup2</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup2.Parent" xml:space="preserve">
+    <value>LoadPanelFullGroup</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup2.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup1.Name" xml:space="preserve">
+    <value>LoadSubGroup1</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup1.Parent" xml:space="preserve">
+    <value>LoadPanelFullGroup</value>
+  </data>
+  <data name="&gt;&gt;LoadSubGroup1.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;LoadPanelGroup.Name" xml:space="preserve">
+    <value>LoadPanelGroup</value>
+  </data>
+  <data name="&gt;&gt;LoadPanelGroup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LoadPanelGroup.Parent" xml:space="preserve">
+    <value>LoadPanelFullGroup</value>
+  </data>
+  <data name="&gt;&gt;LoadPanelGroup.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;Info9.Name" xml:space="preserve">
+    <value>Info9</value>
+  </data>
+  <data name="&gt;&gt;Info9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Info9.Parent" xml:space="preserve">
+    <value>LoadPanelFullGroup</value>
+  </data>
+  <data name="&gt;&gt;Info9.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;Info10.Name" xml:space="preserve">
+    <value>Info10</value>
+  </data>
+  <data name="&gt;&gt;Info10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Info10.Parent" xml:space="preserve">
+    <value>LoadPanelFullGroup</value>
+  </data>
+  <data name="&gt;&gt;Info10.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="LoadPanelFullGroup.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 57</value>
+  </data>
+  <data name="LoadPanelFullGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>308, 421</value>
+  </data>
+  <data name="LoadPanelFullGroup.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;LoadPanelFullGroup.Name" xml:space="preserve">
+    <value>LoadPanelFullGroup</value>
+  </data>
+  <data name="&gt;&gt;LoadPanelFullGroup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LoadPanelFullGroup.Parent" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;LoadPanelFullGroup.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="tabPage2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>664, 516</value>
+  </data>
+  <data name="tabPage2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tabPage2.Text" xml:space="preserve">
+    <value>Загрузка файлов</value>
+  </data>
+  <data name="&gt;&gt;tabPage2.Name" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;tabPage2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPage2.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;Info1.Name" xml:space="preserve">
+    <value>Info1</value>
+  </data>
+  <data name="&gt;&gt;Info1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Info1.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;Info1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;label11.Name" xml:space="preserve">
+    <value>label11</value>
+  </data>
+  <data name="&gt;&gt;label11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label11.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ServPanelFullGroup.Name" xml:space="preserve">
+    <value>ServPanelFullGroup</value>
+  </data>
+  <data name="&gt;&gt;ServPanelFullGroup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ServPanelFullGroup.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;ServPanelFullGroup.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;btnServDel.Name" xml:space="preserve">
+    <value>btnServDel</value>
+  </data>
+  <data name="&gt;&gt;btnServDel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnServDel.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;btnServDel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;Info2.Name" xml:space="preserve">
+    <value>Info2</value>
+  </data>
+  <data name="&gt;&gt;Info2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Info2.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;Info2.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;label9.Name" xml:space="preserve">
+    <value>label9</value>
+  </data>
+  <data name="&gt;&gt;label9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label9.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;btnServInstall.Name" xml:space="preserve">
+    <value>btnServInstall</value>
+  </data>
+  <data name="&gt;&gt;btnServInstall.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnServInstall.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;btnServInstall.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;panelFiles.Name" xml:space="preserve">
+    <value>panelFiles</value>
+  </data>
+  <data name="&gt;&gt;panelFiles.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelFiles.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;panelFiles.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;btnServShow.Name" xml:space="preserve">
+    <value>btnServShow</value>
+  </data>
+  <data name="&gt;&gt;btnServShow.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnServShow.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;btnServShow.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="tabPage1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>664, 516</value>
+  </data>
+  <data name="tabPage1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tabPage1.Text" xml:space="preserve">
+    <value>Файлы на сервере</value>
+  </data>
+  <data name="&gt;&gt;tabPage1.Name" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;tabPage1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPage1.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabPage1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;AutoUpdate_2m.Name" xml:space="preserve">
+    <value>AutoUpdate_2m</value>
+  </data>
+  <data name="&gt;&gt;AutoUpdate_2m.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AutoUpdate_2m.Parent" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;AutoUpdate_2m.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;AutoUpdate_1m.Name" xml:space="preserve">
+    <value>AutoUpdate_1m</value>
+  </data>
+  <data name="&gt;&gt;AutoUpdate_1m.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AutoUpdate_1m.Parent" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;AutoUpdate_1m.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;AutoUpdate_30s.Name" xml:space="preserve">
+    <value>AutoUpdate_30s</value>
+  </data>
+  <data name="&gt;&gt;AutoUpdate_30s.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AutoUpdate_30s.Parent" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;AutoUpdate_30s.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;CheckAutoUpdateSetup.Name" xml:space="preserve">
+    <value>CheckAutoUpdateSetup</value>
+  </data>
+  <data name="&gt;&gt;CheckAutoUpdateSetup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CheckAutoUpdateSetup.Parent" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;CheckAutoUpdateSetup.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;btnStopInstall.Name" xml:space="preserve">
+    <value>btnStopInstall</value>
+  </data>
+  <data name="&gt;&gt;btnStopInstall.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnStopInstall.Parent" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;btnStopInstall.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;btnInstallRefresh.Name" xml:space="preserve">
+    <value>btnInstallRefresh</value>
+  </data>
+  <data name="&gt;&gt;btnInstallRefresh.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnInstallRefresh.Parent" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;btnInstallRefresh.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;panelInstall.Name" xml:space="preserve">
+    <value>panelInstall</value>
+  </data>
+  <data name="&gt;&gt;panelInstall.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelInstall.Parent" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;panelInstall.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;Info13.Name" xml:space="preserve">
+    <value>Info13</value>
+  </data>
+  <data name="&gt;&gt;Info13.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Info13.Parent" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;Info13.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;Info12.Name" xml:space="preserve">
+    <value>Info12</value>
+  </data>
+  <data name="&gt;&gt;Info12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Info12.Parent" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;Info12.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="tabPage3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPage3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>664, 516</value>
+  </data>
+  <data name="tabPage3.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tabPage3.Text" xml:space="preserve">
+    <value>Процесс установки</value>
+  </data>
+  <data name="&gt;&gt;tabPage3.Name" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;tabPage3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPage3.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabPage3.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 27</value>
+  </data>
+  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>672, 542</value>
+  </data>
+  <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.Name" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;labelDrag.Name" xml:space="preserve">
     <value>labelDrag</value>
@@ -545,6 +1006,37 @@
     <value>LoadPanelFullGroup</value>
   </data>
   <data name="&gt;&gt;panelDrop.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="labelDrag.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 14.25pt</value>
+  </data>
+  <data name="labelDrag.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 34</value>
+  </data>
+  <data name="labelDrag.Size" type="System.Drawing.Size, System.Drawing">
+    <value>302, 51</value>
+  </data>
+  <data name="labelDrag.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="labelDrag.Text" xml:space="preserve">
+    <value>Перетащите файлы сюда
+или кликните в эту область</value>
+  </data>
+  <data name="labelDrag.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;labelDrag.Name" xml:space="preserve">
+    <value>labelDrag</value>
+  </data>
+  <data name="&gt;&gt;labelDrag.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelDrag.Parent" xml:space="preserve">
+    <value>panelDrop</value>
+  </data>
+  <data name="&gt;&gt;labelDrag.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="btnDownlPCName.Font" type="System.Drawing.Font, System.Drawing">
@@ -742,6 +1234,75 @@
   <data name="&gt;&gt;LoadSubGroup1.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="&gt;&gt;LoadGroup4.Name" xml:space="preserve">
+    <value>LoadGroup4</value>
+  </data>
+  <data name="&gt;&gt;LoadGroup4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LoadGroup4.Parent" xml:space="preserve">
+    <value>LoadPanelGroup</value>
+  </data>
+  <data name="&gt;&gt;LoadGroup4.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;LoadGroup3.Name" xml:space="preserve">
+    <value>LoadGroup3</value>
+  </data>
+  <data name="&gt;&gt;LoadGroup3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LoadGroup3.Parent" xml:space="preserve">
+    <value>LoadPanelGroup</value>
+  </data>
+  <data name="&gt;&gt;LoadGroup3.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;LoadGroup2.Name" xml:space="preserve">
+    <value>LoadGroup2</value>
+  </data>
+  <data name="&gt;&gt;LoadGroup2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LoadGroup2.Parent" xml:space="preserve">
+    <value>LoadPanelGroup</value>
+  </data>
+  <data name="&gt;&gt;LoadGroup2.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;LoadGroup1.Name" xml:space="preserve">
+    <value>LoadGroup1</value>
+  </data>
+  <data name="&gt;&gt;LoadGroup1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LoadGroup1.Parent" xml:space="preserve">
+    <value>LoadPanelGroup</value>
+  </data>
+  <data name="&gt;&gt;LoadGroup1.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="LoadPanelGroup.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 68</value>
+  </data>
+  <data name="LoadPanelGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 110</value>
+  </data>
+  <data name="LoadPanelGroup.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="&gt;&gt;LoadPanelGroup.Name" xml:space="preserve">
+    <value>LoadPanelGroup</value>
+  </data>
+  <data name="&gt;&gt;LoadPanelGroup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LoadPanelGroup.Parent" xml:space="preserve">
+    <value>LoadPanelFullGroup</value>
+  </data>
+  <data name="&gt;&gt;LoadPanelGroup.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
   <data name="LoadGroup4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -838,27 +1399,6 @@
   <data name="&gt;&gt;LoadGroup1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="LoadPanelGroup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 68</value>
-  </data>
-  <data name="LoadPanelGroup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 110</value>
-  </data>
-  <data name="LoadPanelGroup.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="&gt;&gt;LoadPanelGroup.Name" xml:space="preserve">
-    <value>LoadPanelGroup</value>
-  </data>
-  <data name="&gt;&gt;LoadPanelGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LoadPanelGroup.Parent" xml:space="preserve">
-    <value>LoadPanelFullGroup</value>
-  </data>
-  <data name="&gt;&gt;LoadPanelGroup.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
   <data name="Info9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -918,54 +1458,6 @@
   </data>
   <data name="&gt;&gt;Info10.ZOrder" xml:space="preserve">
     <value>11</value>
-  </data>
-  <data name="LoadPanelFullGroup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 57</value>
-  </data>
-  <data name="LoadPanelFullGroup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 421</value>
-  </data>
-  <data name="LoadPanelFullGroup.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="&gt;&gt;LoadPanelFullGroup.Name" xml:space="preserve">
-    <value>LoadPanelFullGroup</value>
-  </data>
-  <data name="&gt;&gt;LoadPanelFullGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LoadPanelFullGroup.Parent" xml:space="preserve">
-    <value>tabPage2</value>
-  </data>
-  <data name="&gt;&gt;LoadPanelFullGroup.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="tabPage2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>664, 516</value>
-  </data>
-  <data name="tabPage2.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tabPage2.Text" xml:space="preserve">
-    <value>Загрузка файлов</value>
-  </data>
-  <data name="&gt;&gt;tabPage2.Name" xml:space="preserve">
-    <value>tabPage2</value>
-  </data>
-  <data name="&gt;&gt;tabPage2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPage2.Parent" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="Info1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 15.75pt, style=Bold</value>
@@ -1027,6 +1519,147 @@
   <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="&gt;&gt;ServSubGroup5.Name" xml:space="preserve">
+    <value>ServSubGroup5</value>
+  </data>
+  <data name="&gt;&gt;ServSubGroup5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ServSubGroup5.Parent" xml:space="preserve">
+    <value>ServPanelFullGroup</value>
+  </data>
+  <data name="&gt;&gt;ServSubGroup5.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ServPanelGroup.Name" xml:space="preserve">
+    <value>ServPanelGroup</value>
+  </data>
+  <data name="&gt;&gt;ServPanelGroup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ServPanelGroup.Parent" xml:space="preserve">
+    <value>ServPanelFullGroup</value>
+  </data>
+  <data name="&gt;&gt;ServPanelGroup.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ServSubGroup7.Name" xml:space="preserve">
+    <value>ServSubGroup7</value>
+  </data>
+  <data name="&gt;&gt;ServSubGroup7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ServSubGroup7.Parent" xml:space="preserve">
+    <value>ServPanelFullGroup</value>
+  </data>
+  <data name="&gt;&gt;ServSubGroup7.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;Info3.Name" xml:space="preserve">
+    <value>Info3</value>
+  </data>
+  <data name="&gt;&gt;Info3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Info3.Parent" xml:space="preserve">
+    <value>ServPanelFullGroup</value>
+  </data>
+  <data name="&gt;&gt;Info3.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ServSubGroup6.Name" xml:space="preserve">
+    <value>ServSubGroup6</value>
+  </data>
+  <data name="&gt;&gt;ServSubGroup6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ServSubGroup6.Parent" xml:space="preserve">
+    <value>ServPanelFullGroup</value>
+  </data>
+  <data name="&gt;&gt;ServSubGroup6.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;Info4.Name" xml:space="preserve">
+    <value>Info4</value>
+  </data>
+  <data name="&gt;&gt;Info4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Info4.Parent" xml:space="preserve">
+    <value>ServPanelFullGroup</value>
+  </data>
+  <data name="&gt;&gt;Info4.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ServSubGroup4.Name" xml:space="preserve">
+    <value>ServSubGroup4</value>
+  </data>
+  <data name="&gt;&gt;ServSubGroup4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ServSubGroup4.Parent" xml:space="preserve">
+    <value>ServPanelFullGroup</value>
+  </data>
+  <data name="&gt;&gt;ServSubGroup4.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ServSubGroup1.Name" xml:space="preserve">
+    <value>ServSubGroup1</value>
+  </data>
+  <data name="&gt;&gt;ServSubGroup1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ServSubGroup1.Parent" xml:space="preserve">
+    <value>ServPanelFullGroup</value>
+  </data>
+  <data name="&gt;&gt;ServSubGroup1.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ServSubGroup3.Name" xml:space="preserve">
+    <value>ServSubGroup3</value>
+  </data>
+  <data name="&gt;&gt;ServSubGroup3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ServSubGroup3.Parent" xml:space="preserve">
+    <value>ServPanelFullGroup</value>
+  </data>
+  <data name="&gt;&gt;ServSubGroup3.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;ServSubGroup2.Name" xml:space="preserve">
+    <value>ServSubGroup2</value>
+  </data>
+  <data name="&gt;&gt;ServSubGroup2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ServSubGroup2.Parent" xml:space="preserve">
+    <value>ServPanelFullGroup</value>
+  </data>
+  <data name="&gt;&gt;ServSubGroup2.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="ServPanelFullGroup.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 41</value>
+  </data>
+  <data name="ServPanelFullGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>293, 267</value>
+  </data>
+  <data name="ServPanelFullGroup.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;ServPanelFullGroup.Name" xml:space="preserve">
+    <value>ServPanelFullGroup</value>
+  </data>
+  <data name="&gt;&gt;ServPanelFullGroup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ServPanelFullGroup.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;ServPanelFullGroup.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="ServSubGroup5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1050,6 +1683,75 @@
   </data>
   <data name="&gt;&gt;ServSubGroup5.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="&gt;&gt;ServGroup4.Name" xml:space="preserve">
+    <value>ServGroup4</value>
+  </data>
+  <data name="&gt;&gt;ServGroup4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ServGroup4.Parent" xml:space="preserve">
+    <value>ServPanelGroup</value>
+  </data>
+  <data name="&gt;&gt;ServGroup4.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ServGroup3.Name" xml:space="preserve">
+    <value>ServGroup3</value>
+  </data>
+  <data name="&gt;&gt;ServGroup3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ServGroup3.Parent" xml:space="preserve">
+    <value>ServPanelGroup</value>
+  </data>
+  <data name="&gt;&gt;ServGroup3.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ServGroup2.Name" xml:space="preserve">
+    <value>ServGroup2</value>
+  </data>
+  <data name="&gt;&gt;ServGroup2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ServGroup2.Parent" xml:space="preserve">
+    <value>ServPanelGroup</value>
+  </data>
+  <data name="&gt;&gt;ServGroup2.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ServGroup1.Name" xml:space="preserve">
+    <value>ServGroup1</value>
+  </data>
+  <data name="&gt;&gt;ServGroup1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ServGroup1.Parent" xml:space="preserve">
+    <value>ServPanelGroup</value>
+  </data>
+  <data name="&gt;&gt;ServGroup1.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ServPanelGroup.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 103</value>
+  </data>
+  <data name="ServPanelGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 110</value>
+  </data>
+  <data name="ServPanelGroup.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;ServPanelGroup.Name" xml:space="preserve">
+    <value>ServPanelGroup</value>
+  </data>
+  <data name="&gt;&gt;ServPanelGroup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ServPanelGroup.Parent" xml:space="preserve">
+    <value>ServPanelFullGroup</value>
+  </data>
+  <data name="&gt;&gt;ServPanelGroup.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="ServGroup4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1149,27 +1851,6 @@
   </data>
   <data name="&gt;&gt;ServGroup1.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="ServPanelGroup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 103</value>
-  </data>
-  <data name="ServPanelGroup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 110</value>
-  </data>
-  <data name="ServPanelGroup.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="&gt;&gt;ServPanelGroup.Name" xml:space="preserve">
-    <value>ServPanelGroup</value>
-  </data>
-  <data name="&gt;&gt;ServPanelGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ServPanelGroup.Parent" xml:space="preserve">
-    <value>ServPanelFullGroup</value>
-  </data>
-  <data name="&gt;&gt;ServPanelGroup.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="ServSubGroup7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1378,27 +2059,6 @@
   <data name="&gt;&gt;ServSubGroup2.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="ServPanelFullGroup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 41</value>
-  </data>
-  <data name="ServPanelFullGroup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>293, 267</value>
-  </data>
-  <data name="ServPanelFullGroup.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;ServPanelFullGroup.Name" xml:space="preserve">
-    <value>ServPanelFullGroup</value>
-  </data>
-  <data name="&gt;&gt;ServPanelFullGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ServPanelFullGroup.Parent" xml:space="preserve">
-    <value>tabPage1</value>
-  </data>
-  <data name="&gt;&gt;ServPanelFullGroup.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="btnServDel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
   </data>
@@ -1560,33 +2220,6 @@
   </data>
   <data name="&gt;&gt;btnServShow.ZOrder" xml:space="preserve">
     <value>9</value>
-  </data>
-  <data name="tabPage1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>664, 516</value>
-  </data>
-  <data name="tabPage1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="tabPage1.Text" xml:space="preserve">
-    <value>Файлы на сервере</value>
-  </data>
-  <data name="&gt;&gt;tabPage1.Name" xml:space="preserve">
-    <value>tabPage1</value>
-  </data>
-  <data name="&gt;&gt;tabPage1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPage1.Parent" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tabPage1.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="AutoUpdate_2m.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1839,51 +2472,6 @@
   </data>
   <data name="&gt;&gt;Info12.ZOrder" xml:space="preserve">
     <value>8</value>
-  </data>
-  <data name="tabPage3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>664, 516</value>
-  </data>
-  <data name="tabPage3.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="tabPage3.Text" xml:space="preserve">
-    <value>Процесс установки</value>
-  </data>
-  <data name="&gt;&gt;tabPage3.Name" xml:space="preserve">
-    <value>tabPage3</value>
-  </data>
-  <data name="&gt;&gt;tabPage3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPage3.Parent" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tabPage3.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 27</value>
-  </data>
-  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>672, 542</value>
-  </data>
-  <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;tabControl1.Name" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tabControl1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

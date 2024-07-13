@@ -221,7 +221,7 @@ namespace Admin_DAVrun
             ProgressBar.Invoke((Action)(() =>   // Выполняем делегат синхронно в потоке с прогресс-баром
             {
                 ProgressBar.Value = (int)progress;  // Конвертируем в int
-                InfoProcess.Text = $"Загружено: {(int)progress}% ({((double)bytesReceived / 1048576).ToString("#.#")} МБ)"; // отображаем на форме прогресс вида - "Загружено 27% (17,4 МБ)"
+                InfoProcess.Text = $"Загружено: {(int)progress}% ({((double)bytesReceived / 1048576):F1} МБ)"; // Отображаем на форме прогресс вида - "Загружено 27% (17,4 МБ)"
             }));
         }
 

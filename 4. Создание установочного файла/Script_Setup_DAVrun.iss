@@ -6,7 +6,7 @@
 
 ;Copyright (c) 2024 Otto
 ;Автор: Otto
-;Версия: 04.07.24
+;Версия: 13.07.24
 ;GitHub страница:  https://github.com/Otto17/DAVrun
 ;GitFlic страница: https://gitflic.ru/project/otto/davrun
 
@@ -19,7 +19,7 @@
 //Автор скрипта "CodeDependencies.iss" - "DomGries", ссылка на страницу автора "https://github.com/DomGries/InnoDependencyInstaller/tree/master".
 //Код скрипта "CodeDependencies.iss" распространяется по лицензии "The Code Project Open License (CPOL) 1.02".
 
-//ЕСЛИ ДАННАЯ ЛИЦЕНЗИЯ ВАМ НЕ ПОДХОДИТ, ТОГДА УДАЛИТЕ ЭТУ СТРОКУ ИЗ СКРИПТА:
+//ЕСЛИ ДАННАЯ ЛИЦЕНЗИЯ ВАМ НЕ ПОДХОДИТ, ТОГДА УДАЛИТЕ, ЛИБО ЗАКОММЕНТИРУЙТЕ ЭТУ СТРОКУ ИЗ СКРИПТА:
 #include "CodeDependencies.iss"
 //И установите вручную "Visual C++ 2015-2022 Redistributable" по ссылке с официального сайта Microsoft: "https://learn.microsoft.com/ru-ru/cpp/windows/latest-supported-vc-redist?view=msvc-170"
 
@@ -29,7 +29,7 @@
 ; Имя приложения
 #define MyAppName "DAVrun"
 ; Версия приложения
-#define MyAppVersion "04.07.2024"
+#define MyAppVersion "13.07.2024"
 ;Издатель приложения
 #define MyAppPublisher "Otto"
 ; Место сохранения скомпилированного установочного фала
@@ -46,10 +46,27 @@
 #define MySetupFilePath "C:\Program Files"
 
 
+; ДАННЫЕ ДЛЯ ПОДКЛЮЧЕНИЯ К СЕРВЕРУ
+; Включить автоматическое создание конфига для программы "DAVrun" (true - включить, false - выключить)
+#define ENABLE    false
+; Хост
+#define HOST      "https://77.77.77.77:7777/webdav/"
+; Логин
+#define USERNAME  "User"
+; Пароль
+#define PASSWORD  "Passwd"
+; Имя сертификата с расширением
+#define CERT      "cert.crt"
+; Каталог ожидания установок на сервере
+#define FILESETUP "Points"
+; Кол-во символов (число от 0 до 14) для обрезки символов от начала имени ПК
+#define SYMBOLCUT 7
+
+
 [Setup]
 ; ПРИМЕЧАНИЕ: Значение AppID однозначно идентифицирует это приложение. Не используйте одно и то же значение AppID в установщиках для других приложений.
 ; ( Чтобы сгенерировать новый GUID, нажмите Tools |  Generate GUID в среде IDE )
-AppId={{376CC014-D597-4CD1-8D42-B5FD55116B06}
+AppId={{E0593CF6-3859-40C4-B970-E934CBDD0026}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppPublisher={#MyAppPublisher}
@@ -62,12 +79,12 @@ LicenseFile={#MyLicense}
 OutputDir={#MyFolderOutput}
 OutputBaseFilename={#MySetupOutput}
 SetupIconFile={#MyIconSetupOutput}
-UninstallDisplayIcon={#MyIconSetupOutput}
+UninstallDisplayIcon={app}\unins000.exe,0
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
 PrivilegesRequired=admin
-ArchitecturesInstallIn64BitMode=x64
+ArchitecturesInstallIn64BitMode=x64os
 
 [Languages]
 ; Язык установщика
@@ -97,7 +114,12 @@ Filename: "{cmd}"; Parameters: "/C icacls C:\ProgramData\DAVrun /grant:r ""Польз
 ; Даём полные права папке с установленными программами
 Filename: "{cmd}"; Parameters: "/C icacls ""C:\Program Files\DAVrun"" /grant:r ""Пользователи"":(OI)(CI)F /T"; Flags: runhidden
 
-; После установки DAVrun устанавливаем и запускаем службу с ключом "-is"
+; Если включено создание конфига, тогда после установки запускаем программу "DAVrun.exe" с аргументами, создавая зашифрованный конфиг файл
+#if ENABLE
+Filename: "{app}\DAVrun.exe"; Parameters: """{#HOST}"" ""{#USERNAME}"" ""{#PASSWORD}"" ""{#CERT}"" ""{#FILESETUP}"" {#SYMBOLCUT}"; Flags: runascurrentuser waituntilterminated
+#endif
+
+; Затем запускаем службу с ключом "-is"
 Filename: "{app}\SERVICE-DAVrun.exe"; Parameters: "-is"; Flags: runascurrentuser nowait postinstall
 
 
