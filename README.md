@@ -54,6 +54,11 @@ _Проект полностью открыт и распространяетс�
 > GitHub страница:  [https://github.com/Otto17/DelCert](https://github.com/Otto17/DelCert)  
 > GitFlic страница:   [https://gitflic.ru/project/otto/delcert](https://gitflic.ru/project/otto/delcert)
 
+> **DelApplication:**
+> 
+> GitHub страница:  [https://github.com/Otto17/DelApplication](https://github.com/Otto17/DelApplication)  
+> GitFlic страница:   [https://gitflic.ru/project/otto/delapplication](https://gitflic.ru/project/otto/delapplication)
+
 ---
 
 ### Версии
