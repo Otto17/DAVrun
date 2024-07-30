@@ -1,4 +1,4 @@
-;Сценарий, установки программы "DAVrun" создан через Inno Setup v6.3.2
+;Сценарий, установки программы "DAVrun" создан через Inno Setup v6.3.3
 
 
 ;Данная программа является свободным программным обеспечением, распространяющимся по лицензии MIT.
@@ -6,7 +6,7 @@
 
 ;Copyright (c) 2024 Otto
 ;Автор: Otto
-;Версия: 13.07.24
+;Версия: 29.07.24
 ;GitHub страница:  https://github.com/Otto17/DAVrun
 ;GitFlic страница: https://gitflic.ru/project/otto/davrun
 
@@ -29,7 +29,7 @@
 ; Имя приложения
 #define MyAppName "DAVrun"
 ; Версия приложения
-#define MyAppVersion "13.07.2024"
+#define MyAppVersion "29.07.2024"
 ;Издатель приложения
 #define MyAppPublisher "Otto"
 ; Место сохранения скомпилированного установочного фала
@@ -48,13 +48,15 @@
 
 ; ДАННЫЕ ДЛЯ ПОДКЛЮЧЕНИЯ К СЕРВЕРУ
 ; Включить автоматическое создание конфига для программы "DAVrun" (true - включить, false - выключить)
-#define ENABLE    false
+#define ENABLE false
+; Создать конфиг файл от пользователя "LocalSystem"(СИСТЕМА) (true - создать от "СИСТЕМА", false - создать от текущего пользователя)
+#define CreateConfLocalSystem true
 ; Хост
 #define HOST      "https://77.77.77.77:7777/webdav/"
 ; Логин
 #define USERNAME  "User"
 ; Пароль
-#define PASSWORD  "Passwd"
+#define PASSWORD  "Password"
 ; Имя сертификата с расширением
 #define CERT      "cert.crt"
 ; Каталог ожидания установок на сервере
@@ -66,7 +68,7 @@
 [Setup]
 ; ПРИМЕЧАНИЕ: Значение AppID однозначно идентифицирует это приложение. Не используйте одно и то же значение AppID в установщиках для других приложений.
 ; ( Чтобы сгенерировать новый GUID, нажмите Tools |  Generate GUID в среде IDE )
-AppId={{E0593CF6-3859-40C4-B970-E934CBDD0026}
+AppId={{F64A2126-4A3C-4CEF-830B-7E882F6097D1}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppPublisher={#MyAppPublisher}
@@ -114,10 +116,17 @@ Filename: "{cmd}"; Parameters: "/C icacls C:\ProgramData\DAVrun /grant:r ""Польз
 ; Даём полные права папке с установленными программами
 Filename: "{cmd}"; Parameters: "/C icacls ""C:\Program Files\DAVrun"" /grant:r ""Пользователи"":(OI)(CI)F /T"; Flags: runhidden
 
-; Если включено создание конфига, тогда после установки запускаем программу "DAVrun.exe" с аргументами, создавая зашифрованный конфиг файл
+; Если включено создание конфига, тогда после установки проверяем значение "CreateConfLocalSystem" и создаём зашифрованный конфиг файл от имени "СИСТЕМА" или текущего пользователя
 #if ENABLE
-Filename: "{app}\DAVrun.exe"; Parameters: """{#HOST}"" ""{#USERNAME}"" ""{#PASSWORD}"" ""{#CERT}"" ""{#FILESETUP}"" {#SYMBOLCUT}"; Flags: runascurrentuser waituntilterminated
+  #if CreateConfLocalSystem
+    ; Создание конфига от имени "СИСТЕМА"
+    Filename: "{app}\Launch_LocalSystem.exe"; Parameters: """DAVrun.exe {#HOST} {#USERNAME} {#PASSWORD} {#CERT} {#FILESETUP} {#SYMBOLCUT}"""; Flags: runascurrentuser waituntilterminated
+  #else
+    ; Создание конфига от текущего пользователя
+    Filename: "{app}\DAVrun.exe"; Parameters: """{#HOST}"" ""{#USERNAME}"" ""{#PASSWORD}"" ""{#CERT}"" ""{#FILESETUP}"" {#SYMBOLCUT}"; Flags: runascurrentuser waituntilterminated
+  #endif
 #endif
+
 
 ; Затем запускаем службу с ключом "-is"
 Filename: "{app}\SERVICE-DAVrun.exe"; Parameters: "-is"; Flags: runascurrentuser nowait postinstall

@@ -13,8 +13,8 @@
 
 #include "logFile.h"    // Подключаем файл лога
 
-#define CONFIG_FILE "config.enc"    // Зашифрованный конфиг файл
-#define KEY_FILE "key.bin"          // Зашифрованный ключ
+#define CONFIG_FILE "C:\\Program Files\\DAVrun\\config.enc"    // Зашифрованный конфиг файл (полный путь ОБЯЗАТЕЛЕН!)
+#define KEY_FILE "C:\\Program Files\\DAVrun\\key.bin"          // Зашифрованный ключ (полный путь ОБЯЗАТЕЛЕН!)
 
 extern const char *path_Log;    // Получаем сюда путь для сохранения лога из настроек в "main.c"
 

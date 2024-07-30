@@ -13,9 +13,9 @@
 
 #include "logFile.h"    // Подключаем файл лога
 
-#define CONFIG_FILE "config.enc"    // Зашифрованный конфиг файл
-#define KEY_FILE "key.bin"          // Тут храним зашифрованный ключ с рандомной солью
-#define SALT_SIZE 32                // Длина соли (32 байта)
+#define CONFIG_FILE "C:\\Program Files\\DAVrun\\config.enc"    // Зашифрованный конфиг файл (полный путь ОБЯЗАТЕЛЕН!)
+#define KEY_FILE "C:\\Program Files\\DAVrun\\key.bin"          // Тут храним зашифрованный ключ с рандомной солью (полный путь ОБЯЗАТЕЛЕН!)
+#define SALT_SIZE 32                                           // Длина соли (32 байта)
 
 extern const char *hardcoded_password;  // Получаем сюда жёстко закодированный пароль из настроек в "main.c"
 extern const char *pepper;              // Получаем сюда перчик для пароля из настроек в "main.c"

@@ -12,7 +12,7 @@
 
 	Copyright (c) 2024 Otto
 	Автор: Otto
-	Версия: 13.07.24
+	Версия: 29.07.24
 	GitHub страница:  https://github.com/Otto17/DAVrun
 	GitFlic страница: https://gitflic.ru/project/otto/davrun
 
@@ -22,13 +22,13 @@
 
 //НАСТРОЙКИ
 //Подключаем код для шифрования конфиг файла (нужное раскомментировать)
-//#include "soft_Encryption.h"        // Шифрование без привязки к ПК (безопасность ниже, но конфиг можно переносить на другие компьютеры)
-#include "strong_Encryption.h"    // Шифрование c привязкой к ПК (безопасность на много выше, но конфиг НЕ переносим на другие компьютеры)
+#include "soft_Encryption.h"        // Шифрование без привязки к ПК (безопасность ниже, но конфиг можно переносить на другие компьютеры)
+//#include "strong_Encryption.h"    // Шифрование c привязкой к ПК (безопасность на много выше, но конфиг НЕ переносим на другие компьютеры)
 
 //Данный блок будет доступен, если раскомментирована "soft_Encryption.h"
 #ifdef SOFT_ENCRYPTION_H
-const char *hardcoded_password = "mLAQKnTNuCShHREbpvyEELhxnK2eaejH";    // Жёстко закодированный пароль (ОБЯЗАТЕЛЬНО СГЕНЕРИРОВАТЬ СВОЙ ЧЕРЕЗ ПРОГРАММУ "Keygen_Pepper_Hard_Passwd.exe")
-const char *pepper = "z79xciXAatZBwtRZ";                                // Поперчить пароль             (ОБЯЗАТЕЛЬНО СГЕНЕРИРОВАТЬ СВОЙ ЧЕРЕЗ ПРОГРАММУ "Keygen_Pepper_Hard_Passwd.exe")
+const char *hardcoded_password = "gpWKbNCccQiLQJLDueWUSJqmoF1Bh1kb";    // Жёстко закодированный пароль (ОБЯЗАТЕЛЬНО СГЕНЕРИРОВАТЬ СВОЙ ЧЕРЕЗ ПРОГРАММУ "Keygen_Pepper_Hard_Passwd.exe")
+const char *pepper = "Wstyo2eRbXjXtuKN";                                // Поперчить пароль             (ОБЯЗАТЕЛЬНО СГЕНЕРИРОВАТЬ СВОЙ ЧЕРЕЗ ПРОГРАММУ "Keygen_Pepper_Hard_Passwd.exe")
 #endif
 
 //Папка куда будут скачиваться самораспаковывающиеся архивы
@@ -638,12 +638,12 @@ int main(int argc, char *argv[]) {
         if (!file_exists(CONFIG_FILE) && !file_exists(KEY_FILE)) {      // Проверяем, что файлы есть
             setConsoleTextColor(FOREGROUND_RED | FOREGROUND_INTENSITY); // Ярко красный цвет
             printf("Файлы конфигурации и ключа не существуют!\n");
-            setConsoleTextColor(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);   // Сбрасывавем цвет на стандартный
+            setConsoleTextColor(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);   // Сбрасываем цвет на стандартный
             return 0;
         }
         setConsoleTextColor(FOREGROUND_GREEN | FOREGROUND_INTENSITY);               // Ярко зелёный цвет
         delete_config_and_key();                                                    // Удаляем конфиг
-        setConsoleTextColor(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);   // Сбрасывавем цвет на стандартный
+        setConsoleTextColor(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);   // Сбрасываем цвет на стандартный
         return 0;
     }
 
@@ -659,7 +659,7 @@ int main(int argc, char *argv[]) {
         if (!is_positive_integer(argv[6]) || atoi(argv[6]) < 0 || atoi(argv[6]) > 14) {
             setConsoleTextColor(FOREGROUND_RED | FOREGROUND_INTENSITY); // Ярко красный цвет
             printf("Недопустимое значение в последнем аргументе. Используйте положительное целое число от 0 до 14.\n");
-            setConsoleTextColor(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);   // Сбрасывавем цвет на стандартный
+            setConsoleTextColor(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);   // Сбрасываем цвет на стандартный
             return 1;
         }
 
@@ -668,7 +668,7 @@ int main(int argc, char *argv[]) {
 
         setConsoleTextColor(FOREGROUND_GREEN | FOREGROUND_INTENSITY); // Ярко зелёный цвет
         printf("Конфигурация сохранена.\n");
-        setConsoleTextColor(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);   // Сбрасывавем цвет на стандартный
+        setConsoleTextColor(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);   // Сбрасываем цвет на стандартный
         return 0;
     } else {
         //Если получили меньше или больше 6 аргументов
@@ -698,7 +698,7 @@ int main(int argc, char *argv[]) {
             printf("GitHub страница:  https://github.com/Otto17/DelCert\n");
             printf("GitFlic страница: https://gitflic.ru/project/otto/delcert\n");
 
-            setConsoleTextColor(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE); // Сбрасывавем цвет на стандартный
+            setConsoleTextColor(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE); // Сбрасываем цвет на стандартный
             return 1;
         }
 
@@ -783,7 +783,7 @@ int main(int argc, char *argv[]) {
             
             setConsoleTextColor(FOREGROUND_GREEN | FOREGROUND_INTENSITY);               // Ярко зелёный цвет
             delete_config_and_key();                                                    // Удаляем конфиг
-            setConsoleTextColor(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);   // Сбрасывавем цвет на стандартный
+            setConsoleTextColor(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);   // Сбрасываем цвет на стандартный
             return 1;
         }
     }
