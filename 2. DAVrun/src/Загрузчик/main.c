@@ -27,8 +27,8 @@
 
 //Данный блок будет доступен, если раскомментирована "soft_Encryption.h"
 #ifdef SOFT_ENCRYPTION_H
-const char *hardcoded_password = "gpWKbNCccQiLQJLDueWUSJqmoF1Bh1kb";    // Жёстко закодированный пароль (ОБЯЗАТЕЛЬНО СГЕНЕРИРОВАТЬ СВОЙ ЧЕРЕЗ ПРОГРАММУ "Keygen_Pepper_Hard_Passwd.exe")
-const char *pepper = "Wstyo2eRbXjXtuKN";                                // Поперчить пароль             (ОБЯЗАТЕЛЬНО СГЕНЕРИРОВАТЬ СВОЙ ЧЕРЕЗ ПРОГРАММУ "Keygen_Pepper_Hard_Passwd.exe")
+const char *hardcoded_password = "pUtC0H3Agjp6cG5bUb0uVEVHjeVPvV2v";    // Жёстко закодированный пароль (ОБЯЗАТЕЛЬНО СГЕНЕРИРОВАТЬ СВОЙ ЧЕРЕЗ ПРОГРАММУ "Keygen_Pepper_Hard_Passwd.exe") из папки "Генератор ключей"
+const char *pepper = "fK5DVth2U8gIwJ4Y";                                // Поперчить пароль             (ОБЯЗАТЕЛЬНО СГЕНЕРИРОВАТЬ СВОЙ ЧЕРЕЗ ПРОГРАММУ "Keygen_Pepper_Hard_Passwd.exe") из папки "Генератор ключей"
 #endif
 
 //Папка куда будут скачиваться самораспаковывающиеся архивы

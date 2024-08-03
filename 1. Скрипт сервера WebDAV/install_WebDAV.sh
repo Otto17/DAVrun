@@ -6,7 +6,7 @@
 
 # Copyright (c) 2024 Otto
 # Автор: Otto
-# Версия: 29.06.24
+# Версия: 02.08.24
 # GitHub страница:  https://github.com/Otto17/DAVrun
 # GitFlic страница: https://gitflic.ru/project/otto/davrun
 
@@ -19,6 +19,7 @@ set -e
 # Проверяем, запущен ли скрипт от sudo или root
 if [ "$(id -u)" != "0" ]; then
     echo "ЗАПУСТИТЕ скрипт через 'sudo' или от 'root'!"
+    echo "Если используете Debian, рекомендую зайти от рута: 'su - root'"
     exit 1
 fi
 
@@ -69,7 +70,7 @@ IGNORE_IP=""
 #IGNORE_IP="192.168.1.27"
 # Посмотреть заблокированные IP командой:
 # "sudo fail2ban-client status sshd" или "sudo fail2ban-client status webdav" (смотря в какой секции бан)
-# исключить заблокированные IP командой:
+# Исключить заблокированные IP командой:
 # "sudo fail2ban-client set sshd unbanip 192.168.1.27" или "sudo fail2ban-client set webdav unbanip 192.168.0.17" (смотря в какой секции бан)
 
 
@@ -80,7 +81,17 @@ IGNORE_IP=""
 apt update && apt full-upgrade -y
 
 # Устанавливаем "Apache" (сервер), "OpenSSL" (для создания сертификата), "Expect" (для облегчения автоматизации), "fail2ban" (для защиты от перебора паролей), acl (список управления доступом) и ufw (Брандмауэр)
-apt install -y apache2 openssl expect fail2ban acl ufw
+apt install -y apache2 openssl expect fail2ban acl ufw rsyslog
+
+
+
+# -/-/-/- СЕРВИС УПРАВЛЕНИЯ ЛОГАМИ -/-/-/- #
+
+# Устанавливаем службу управления логами на автозапуск
+systemctl enable rsyslog
+
+# И запускаем её
+systemctl start rsyslog
 
 
 
@@ -297,6 +308,15 @@ EOF
 
 # Перезапускаем Fail2Ban
 systemctl restart fail2ban
+
+
+
+# -/-/-/- НАСТРОЙКА SSH -/-/-/- #
+# Принудительно запрещаем подключение от root по SSH
+sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
+
+# Перезапускаем демон SSH
+systemctl restart sshd
 
 
 
