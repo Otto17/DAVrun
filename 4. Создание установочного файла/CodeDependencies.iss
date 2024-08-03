@@ -215,7 +215,7 @@ begin
 begin
   if not IsMsiProductInstalled('{36F68A90-239C-34DF-B58C-64B30153CE35}', PackVersionComponents(14, 30, 30704, 0)) then begin
     Dependency_Add('vcredist2022_x64.exe',
-      '/passive /norestart',
+      '/install /quiet /norestart',
       'Visual C++ 2015-2022 Redistributable (x64)',
       'https://aka.ms/vs/17/release/vc_redist.x64.exe',
       '', False, False);

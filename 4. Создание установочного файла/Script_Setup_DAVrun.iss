@@ -6,7 +6,7 @@
 
 ;Copyright (c) 2024 Otto
 ;Автор: Otto
-;Версия: 29.07.24
+;Версия: 02.08.24
 ;GitHub страница:  https://github.com/Otto17/DAVrun
 ;GitFlic страница: https://gitflic.ru/project/otto/davrun
 
@@ -29,7 +29,7 @@
 ; Имя приложения
 #define MyAppName "DAVrun"
 ; Версия приложения
-#define MyAppVersion "29.07.2024"
+#define MyAppVersion "02.08.24"
 ;Издатель приложения
 #define MyAppPublisher "Otto"
 ; Место сохранения скомпилированного установочного фала
@@ -48,9 +48,9 @@
 
 ; ДАННЫЕ ДЛЯ ПОДКЛЮЧЕНИЯ К СЕРВЕРУ
 ; Включить автоматическое создание конфига для программы "DAVrun" (true - включить, false - выключить)
-#define ENABLE false
+#define ENABLE true
 ; Создать конфиг файл от пользователя "LocalSystem"(СИСТЕМА) (true - создать от "СИСТЕМА", false - создать от текущего пользователя)
-#define CreateConfLocalSystem true
+#define CreateConfLocalSystem false
 ; Хост
 #define HOST      "https://77.77.77.77:7777/webdav/"
 ; Логин
@@ -87,6 +87,9 @@ SolidCompression=yes
 WizardStyle=modern
 PrivilegesRequired=admin
 ArchitecturesInstallIn64BitMode=x64os
+; Отключаем предложение перезагрузить компьютер после установки программы
+RestartIfNeededByRun=no
+
 
 [Languages]
 ; Язык установщика
@@ -129,7 +132,7 @@ Filename: "{cmd}"; Parameters: "/C icacls ""C:\Program Files\DAVrun"" /grant:r "
 
 
 ; Затем запускаем службу с ключом "-is"
-Filename: "{app}\SERVICE-DAVrun.exe"; Parameters: "-is"; Flags: runascurrentuser nowait postinstall
+Filename: "{app}\SERVICE-DAVrun.exe"; Parameters: "-is"; Flags: runascurrentuser waituntilterminated
 
 
 [UninstallRun]
@@ -149,4 +152,15 @@ Filename: "{cmd}"; Parameters: "/C powershell -Command Remove-MpPreference -Excl
 procedure InitializeWizard;
 begin
   WizardForm.LicenseAcceptedRadio.Checked := True;
+end;
+
+
+// Выделяем и выбираем по умолчанию "Нет, я произведу перезагрузку позже" на странице завершения
+procedure CurPageChanged(CurPageID: Integer);
+begin
+  if CurPageID = wpFinished then
+  begin
+    WizardForm.PreparingNoRadio.Checked := True;
+    WizardForm.NoRadio.Checked := True;
+  end;
 end;

@@ -1,4 +1,5 @@
 @echo off
 
 :: Тихая установка "Setup_DAVrun.exe"
-Setup_DAVrun.exe /verysilent
+:: Запускает установщик в автоматическом режиме (отображается окно выполнения).
+Setup_DAVrun.exe /silent /NORESTART
