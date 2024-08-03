@@ -6,7 +6,7 @@
 
 	Copyright (c) 2024 Otto
 	Автор: Otto
-	Версия: 07.07.24
+	Версия: 02.08.24
 	GitHub страница:  https://github.com/Otto17/DAVrun
 	GitFlic страница: https://gitflic.ru/project/otto/davrun
 

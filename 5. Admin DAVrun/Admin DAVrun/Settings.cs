@@ -1,11 +1,12 @@
 ﻿using System;               // Библиотека предоставляет доступ к базовым классам и функциональности .NET Framework
 using System.Windows.Forms; // Библиотека используется для создания графического пользовательского интерфейса (GUI) в приложениях Windows
 
+
 namespace Admin_DAVrun
 {
     public partial class Settings : Form
     {
-        private bool isCheckBoxSaveChecked; // Флаг для изменения состояния кнопки "Да" в зависимости от состояния галочки "checkBoxSave"
+        private readonly bool isCheckBoxSaveChecked; // Флаг для изменения состояния кнопки "Да" в зависимости от состояния галочки "checkBoxSave"
 
         internal Settings(bool isCheckBoxSaveChecked)   // Получаем состояние флага от функции "btnSettings_Click()" из формы "Connect"
         {
@@ -117,7 +118,7 @@ namespace Admin_DAVrun
             Connect.config.OnOffSubGroup7 = OnOffSubGroup7.Checked;
 
             //Сохраняем в конфиг
-            Connect ConnectForm = new Connect();
+            Connect ConnectForm = new();
             ConnectForm.SaveConfig();
 
             //Обновляем текстовые значения и состояния элементов на форме "Management"
@@ -154,7 +155,7 @@ namespace Admin_DAVrun
             Connect.config.LinkCommonPath = LinkCommonPath.Text;
 
             // Сохраняем в конфиг
-            Connect ConnectForm = new Connect();
+            Connect ConnectForm = new();
             ConnectForm.SaveConfig();
 
             MessageBox.Show("Сохранено в конфиг!");
@@ -163,7 +164,7 @@ namespace Admin_DAVrun
         //Метод для показа PUSH уведомления
         private void ShowNotification(string message, Control control, int displayTimeInSeconds)    // Текст сообщения, элемент управления от которого показывать сообщение, время показа в миллисекундах
         {
-            ToolTip toolTip = new ToolTip();
+            ToolTip toolTip = new();
             toolTip.Show(message, control, 0, 0, displayTimeInSeconds); // Уведомление будет показано "displayTimeInSeconds" миллисекунд
         }
 

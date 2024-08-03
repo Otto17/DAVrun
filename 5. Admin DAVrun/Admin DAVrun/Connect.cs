@@ -8,6 +8,7 @@ using System.Security.Cryptography; // Библиотека содержит к�
 using Renci.SshNet;                 // Библиотека предоставляет возможность установления SSH-соединения и работы с удаленными серверами (необходимо добавить из NuGet)
 using Newtonsoft.Json;              // Библиотека позволяет работать с форматом JSON, включая чтение, запись и обработку данных в формате JSON (необходимо добавить из NuGet)
 
+
 namespace Admin_DAVrun
 {
     public partial class Connect : Form
@@ -16,15 +17,11 @@ namespace Admin_DAVrun
         private SftpClient sftpClient;                      // Для подключения к SFTP
         internal static Management formManagementInstance;  // Для доступа к форме "Management"
         private bool isPasswordVisible = false;             // Флаг для кнопки показать/скрыть пароль
-        internal static Config config = new Config();       // Для доступа к классу с конфигом
+        internal static Config config = new();              // Для доступа к классу с конфигом
         internal static int PassAttempts = 5;               // Кол-во попыток ввода мастер-пароля
 
         //Сохраняем конфиг в папку пользователя, от которого запустили программу, через метод "Environment.GetFolderPath()" для корректного получения пути к локальной папке пользователя
         internal static readonly string configFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Admin DAVrun", "config.json"); // Аналогично "%LocalAppData%"
-
-        //Ключ шифрования конфига AES-256 и случайное значение IV (Initialization Vector - Вектор Инициализации)
-        internal static readonly byte[] Key = new byte[] { 43, 129, 224, 13, 255, 200, 159, 43, 243, 140, 62, 81, 84, 32, 0, 231, 32, 168, 55, 41, 252, 7, 214, 40, 2, 187, 16, 103, 147, 21, 106, 106 }; // 32-х байтовый для AES-256 (именно БАЙТОВЫЙ, а не битный)
-        internal static readonly byte[] IV = new byte[] { 26, 167, 13, 65, 162, 145, 139, 185, 55, 46, 24, 66, 107, 25, 3, 200 }; // 16-ти байтовый IV (именно БАЙТОВЫЙ, а не битный)
 
         internal Connect()
         {
@@ -54,9 +51,9 @@ namespace Admin_DAVrun
             //Если мастер-пароль установлен, показываем форму для ввода пароля
             if (!string.IsNullOrEmpty(config.MasterPassword))
             {
-                this.Hide();                                    // Скрываем форму "Connect"
-                MasterPasswd MasterPasswd = new MasterPasswd(); // Создаём новый объект формы "MasterPasswd"
-                MasterPasswd.ShowDialog();                      // Открываем форму в диалоговом режиме для блокировки других действий, пока форма открыта
+                this.Hide();                            // Скрываем форму "Connect"
+                MasterPasswd MasterPasswd = new();      // Создаём новый объект формы "MasterPasswd"
+                MasterPasswd.ShowDialog();              // Открываем форму в диалоговом режиме для блокировки других действий, пока форма открыта
 
                 if (!MasterPasswd.IsPasswordCorrect)    // Проверка введённого мастер-пароля на корректность
                 {
@@ -130,7 +127,7 @@ namespace Admin_DAVrun
                     //Если "formManagementInstance" не существует или был уничтожен, то создаём новый экземпляр формы "Management"
                     if (formManagementInstance == null || formManagementInstance.IsDisposed)
                     {
-                        formManagementInstance = new Management(this, sshClient, sftpClient);
+                        formManagementInstance = new Management(sshClient, sftpClient);
 
                         //Обработчик событий для отключения SSH и SFTP с последующим завершением работы программы
                         formManagementInstance.FormClosed += (s, args) =>
@@ -208,7 +205,7 @@ namespace Admin_DAVrun
                 if (string.IsNullOrEmpty(config.MasterPassword))    // Если поле с мастер-паролем пустое
                 {
                     //Показываем окно для установки мастер-пароля (только при ручной установке галочки)
-                    SetMasterPasswd SetMasterPasswd = new SetMasterPasswd();
+                    SetMasterPasswd SetMasterPasswd = new();
                     SetMasterPasswd.ShowDialog();
 
                     if (!SetMasterPasswd.IsPasswordSet) // Если мастер-пароль не установлен
@@ -271,7 +268,7 @@ namespace Admin_DAVrun
                 try
                 {
                     var encryptedConfigJson = File.ReadAllBytes(configFilePath);    // Считываем массив байтов из конфига
-                    var configJson = Decrypt(encryptedConfigJson, Key, IV);         // Дешифруем
+                    var configJson = Decrypt(encryptedConfigJson);                  // Дешифруем
                     config = JsonConvert.DeserializeObject<Config>(configJson);     // Преобразовываем в объект "config" десериализацию
 
                     //Проверка, если IP, Логин и Пароль не пустые и пустой мастер-пароль
@@ -309,7 +306,7 @@ namespace Admin_DAVrun
         internal void SaveConfig()
         {
             var configJson = JsonConvert.SerializeObject(config);       // Преобразуем объект "config" в формат JSON
-            var encryptedConfigJson = Encrypt(configJson, Key, IV);     // Зашифровываем конфиг
+            var encryptedConfigJson = Encrypt(configJson);              // Зашифровываем конфиг
             File.WriteAllBytes(configFilePath, encryptedConfigJson);    // Записываем зашифрованный JSON в файл по указанному пути "configFilePath"
         }
 
@@ -318,7 +315,7 @@ namespace Admin_DAVrun
         {
             var config = new Config();
             var configJson = JsonConvert.SerializeObject(config);       // Преобразуем объект "config" в формат JSON
-            var encryptedConfigJson = Encrypt(configJson, Key, IV);     // Зашифровываем конфиг
+            var encryptedConfigJson = Encrypt(configJson);              // Зашифровываем конфиг
             File.WriteAllBytes(configFilePath, encryptedConfigJson);    // Записываем зашифрованный JSON в файл по указанному пути "configFilePath"
         }
 
@@ -327,57 +324,35 @@ namespace Admin_DAVrun
         {
             var defaultConfig = new Config();
             var configJson = JsonConvert.SerializeObject(defaultConfig);    // Преобразуем объект "config" в формат JSON
-            var encryptedConfigJson = Encrypt(configJson, Key, IV);         // Зашифровываем конфиг
+            var encryptedConfigJson = Encrypt(configJson);                  // Зашифровываем конфиг
             File.WriteAllBytes(configFilePath, encryptedConfigJson);        // Записываем зашифрованный JSON в файл по указанному пути "configFilePath"
         }
 
-        //Функция шифрования конфига по алгоритму AES-256 и IV (Вектор Инициализации)
-        private static byte[] Encrypt(string plainText, byte[] key, byte[] iv)  // Строка шифрования, ключ и Вектор Инициализации для шифрования
+        //Функция шифрования конфига через Windows DPAPI (Data Protection Application Programming Interface) по алгоритму "AES" или "Triple DES" (выбирается автоматически в зависимости от версии Windows и наличия аппаратных возможностей)
+        private static byte[] Encrypt(string plainText)
         {
-            using (Aes aes = Aes.Create())  // Создаём экземпляр класса
-            {
-                //Устанавливаем свойства "Key" и "IV" у объекта "aes" равными переданным в метод параметрам "key" и "iv"
-                aes.Key = key;
-                aes.IV = iv;
-                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);  // Создаём объект, который будет выполнять шифрование
+            byte[] plainBytes = System.Text.Encoding.UTF8.GetBytes(plainText);                  // Кодируем полученную строку в UTF-8 (так как метод шифрования работает с байтами)
+            return ProtectedData.Protect(plainBytes, null, DataProtectionScope.CurrentUser);    // Данные будут шифроваться с использованием защиты, доступной для текущего пользователя "CurrentUser"
 
-                using (MemoryStream ms = new MemoryStream())    // Создаём объект "MemoryStream ms" для хранения зашифрованных данных
-                {
-                    using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))   // Создаём объект "CryptoStream cs", который применяет алгоритм шифрования "encryptor" к потоку "ms" в режиме записи
-                    {
-                        using (StreamWriter sw = new StreamWriter(cs))  // Создаём объект "StreamWriter sw", который будет записывать данные в строку "plainText" в объект "cs"
-                        {
-                            sw.Write(plainText);    // Сохраняем строку "plainText" в "sw"
-                        }
-                        return ms.ToArray();    // Возвращаем зашифрованные данные в виде массива байт
-                    }
-                }
-            }
+            //Заметка
+            //Windows 7 и 8: Используют "Triple DES", но могут использовать "AES", если аппаратные возможности это позволяют.
+            //Windows 8.1 и выше: По умолчанию используют "AES" (предпочтительно "AES-256"), если это поддерживается системой.
         }
 
-        //Функция дешифрования конфига по алгоритму AES-256 и IV (Вектор Инициализации)
-        private static string Decrypt(byte[] cipherText, byte[] key, byte[] iv) // Строка дешифрования, ключ и Вектор Инициализации для шифрования
+        //Функция дешифрования конфига через Windows DPAPI (Data Protection Application Programming Interface) по алгоритму "AES" или "Triple DES" (выбирается автоматически в зависимости от версии Windows и наличия аппаратных возможностей)
+        private static string Decrypt(byte[] cipherText)
         {
-            using (Aes aes = Aes.Create())  // Создаём экземпляр класса
-            {
-                //Устанавливаем свойства "Key" и "IV" у объекта "aes" равными переданным в метод параметрам "key" и "iv"
-                aes.Key = key;
-                aes.IV = iv;
-                ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);  // Создаём объект, который будет выполнять дешифрование
+            byte[] decryptedBytes = ProtectedData.Unprotect(cipherText, null, DataProtectionScope.CurrentUser); // Получаем декодированные исходные байты с использованием защиты, доступной для текущего пользователя "CurrentUser"
+            return System.Text.Encoding.UTF8.GetString(decryptedBytes);                                         // Преобразуем байты в строку с использованием кодировки UTF-8
 
-                using (MemoryStream ms = new MemoryStream(cipherText))  // Создаём объект "MemoryStream ms" для хранения расшифрованных данных
-                {
-                    using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))    // Создаём объект "CryptoStream cs", который применяет алгоритм дешифрования "decryptor" к потоку "ms" в режиме чтения
-                    {
-                        using (StreamReader sr = new StreamReader(cs))  // Создаём объект "StreamWriter sr", который будет считывать данные из "CryptoStream cs"
-                        {
-                            return sr.ReadToEnd();  // Читаем расшифрованные данные и возвращаем их в виде строки
-                        }
-                    }
-                }
-            }
+            //Заметка
+            //Windows 7 и 8: Используют "Triple DES", но могут использовать "AES", если аппаратные возможности это позволяют.
+            //Windows 8.1 и выше: По умолчанию используют "AES" (предпочтительно "AES-256"), если это поддерживается системой.
         }
     }
+
+
+  
 
     //Класс с шаблоном конфиг файла
     public class Config

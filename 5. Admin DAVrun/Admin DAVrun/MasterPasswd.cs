@@ -1,6 +1,7 @@
 ﻿using System;               // Библиотека предоставляет доступ к базовым классам и функциональности .NET Framework
 using System.Windows.Forms; // Библиотека используется для создания графического пользовательского интерфейса (GUI) в приложениях Windows
 
+
 namespace Admin_DAVrun
 {
     public partial class MasterPasswd : Form
@@ -19,7 +20,7 @@ namespace Admin_DAVrun
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            Connect Connect = new Connect(); // Создаём экземпляр "Connect" класса "Connect"
+            Connect Connect = new(); // Создаём экземпляр "Connect" класса "Connect"
 
             if (TextMaster.Text == Connect.config.MasterPassword)   // Проверка мастер-пароля на корректность
             {
@@ -42,6 +43,8 @@ namespace Admin_DAVrun
                 else
                 {
                     MessageBox.Show($"Неверный пароль. Осталось попыток: {Connect.config.PasswordAttempts}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    TextMaster.SelectAll(); // Выделяем весь текст в поле ввода
+                    TextMaster.Focus();     // Устанавливаем фокус на это же поле ввода
                 }
             }
         }

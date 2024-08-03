@@ -87,6 +87,8 @@
             this.SetPasswd2.PasswordChar = '*';
             this.SetPasswd2.Size = new System.Drawing.Size(165, 22);
             this.SetPasswd2.TabIndex = 4;
+            this.SetPasswd2.Click += new System.EventHandler(this.SetPasswd2_Click);
+            this.SetPasswd2.Enter += new System.EventHandler(this.SetPasswd2_Enter);
             // 
             // btnSave
             // 

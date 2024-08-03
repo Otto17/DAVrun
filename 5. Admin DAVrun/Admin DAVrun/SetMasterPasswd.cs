@@ -2,6 +2,7 @@
 using System.Linq;          // Библиотека предоставляет методы для выполнения операций LINQ (Language-Integrated Query) над данными
 using System.Windows.Forms; // Библиотека используется для создания графического пользовательского интерфейса (GUI) в приложениях Windows
 
+
 namespace Admin_DAVrun
 {
     public partial class SetMasterPasswd : Form
@@ -12,6 +13,7 @@ namespace Admin_DAVrun
         internal SetMasterPasswd()
         {
             InitializeComponent();  // Инициализируем компоненты формы
+            SetPasswd2.Enter += SetPasswd2_Enter;   // Добавляем обработчик события Enter для поля SetPasswd2
         }
 
         private void Form5_Load(object sender, EventArgs e)
@@ -46,6 +48,8 @@ namespace Admin_DAVrun
             else
             {
                 MessageBox.Show("Пароли не совпадают. Попробуйте еще раз.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                SetPasswd1.SelectAll(); // Выделяем весь текст в поле ввода
+                SetPasswd1.Focus();     // Устанавливаем фокус на это же поле ввода
             }
         }
 
@@ -59,6 +63,18 @@ namespace Admin_DAVrun
                 IsPasswordSet = false;  // Опускаем флаг, что бы не дать установить галочку на "checkBoxSave" на форме "Connect"
                 this.Close();           // Закрываем форму "SetMasterPasswd"
             }
+        }
+
+        //Обработчик для выделения поля "SetPasswd2" при переходе на него кнопкой "Tab"
+        private void SetPasswd2_Enter(object sender, EventArgs e)
+        {
+            SetPasswd2.SelectAll(); // Выделяем весь текст в поле ввода
+        }
+
+        //Обработчик для выделения поля "SetPasswd2" при клике на него мышкой
+        private void SetPasswd2_Click(object sender, EventArgs e)
+        {
+            SetPasswd2.SelectAll(); // Выделяем весь текст в поле ввода
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;               // Библиотека предоставляет доступ к базовым классам и функциональности .NET Framework
 using System.Windows.Forms; // Библиотека используется для создания графического пользовательского интерфейса (GUI) в приложениях Windows
 
+
 namespace Admin_DAVrun
 {
     public partial class About : Form
@@ -18,6 +19,11 @@ namespace Admin_DAVrun
         private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start(e.LinkText);   // Разрешаем открывать ссылки из текстового поля "О программе"
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

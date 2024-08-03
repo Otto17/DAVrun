@@ -10,12 +10,13 @@ using Renci.SshNet;                 // Библиотека предоставл
 using System.Data;                  // Библиотека  предоставляет доступ к работе с данными и базами данных, включая подключение, извлечение и обновление данных
 using System.Text;                  // Библиотека предоставляет классы и методы для работы с текстом, включая работу со строками, преобразованием кодировок и форматированием текста
 
+
 namespace Admin_DAVrun
 {
     public partial class Management : Form
     {
-        private List<string> draggedFiles = new List<string>();         // Регистрация событий изменения состояния панели Drag and Drop
-        private List<CheckBox> fileCheckBoxes = new List<CheckBox>();   // Регистрация событий изменения состояния радио-кнопок для групп и подгрупп
+        private static readonly List<string> draggedFiles = [];     // Регистрация событий изменения состояния панели Drag and Drop
+        private static readonly List<CheckBox> fileCheckBoxes = []; // Регистрация событий изменения состояния радио-кнопок для групп и подгрупп
 
         private string selectedFilePath;    // Переменная для работы с setup файлом (самораспаковывающийся архив)
         private string selectedFileHash;    // Переменная для работы с хеш setup файла
@@ -25,7 +26,7 @@ namespace Admin_DAVrun
 
         private System.Timers.Timer autoUpdateTimer;    // Таймер для автообновления списка ожидания на установку
 
-        internal Management(Connect Connect, SshClient sshClient, SftpClient sftpClient)
+        internal Management(SshClient sshClient, SftpClient sftpClient)
         {
             InitializeComponent();          // Инициализируем компоненты формы
             InitializeAutoUpdateControls(); // Инициализация автообновления списка ожидания на установку
@@ -118,7 +119,7 @@ namespace Admin_DAVrun
         //Вызов формы "About" (О программе)
         private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            About About_O_Programme = new About();
+            About About_O_Programme = new();
             About_O_Programme.StartPosition = FormStartPosition.Manual;         // Устанавливаем начальную позицию формы
             About_O_Programme.Location = new System.Drawing.Point(              // Устанавливаем координаты расположения формы относительно текущей формы
                 this.Location.X + (this.Width - About_O_Programme.Width) / 2,   // Вычисляем ширину относительно формы "About"
@@ -135,7 +136,7 @@ namespace Admin_DAVrun
                 using (FileStream fileStream = File.OpenRead(filePath)) // Открываем файл по указанному пути
                 {
                     byte[] hashBytes = sha256.ComputeHash(fileStream);  // Вычисляем хеш-сумму файла
-                    StringBuilder hashString = new StringBuilder();     // Создаём объект "StringBuilder" для построения строки хеша
+                    StringBuilder hashString = new();     // Создаём объект "StringBuilder" для построения строки хеша
 
                     foreach (byte b in hashBytes)   // Проходим циклом по массиву и строим строку в hex формате
                     {
@@ -159,14 +160,14 @@ namespace Admin_DAVrun
         //Метод для показа уведомления
         private void ShowNotification(string message)
         {
-            ToolTip toolTip = new ToolTip();
+            ToolTip toolTip = new();
             toolTip.Show(message, labelhash, 0, -20, 2500); // Уведомление будет показано 2.5 секунды
         }
 
         //Кнопка выбора setup файла
         private void btnSelectFile_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())    // Создаём объект класса "OpenFileDialog"
+            using (OpenFileDialog openFileDialog = new())                   // Создаём объект класса "OpenFileDialog"
             {
                 if (openFileDialog.ShowDialog() == DialogResult.OK)         // Проверяем, была ли нажата кнопка "Открыть"
                 {
@@ -276,11 +277,11 @@ namespace Admin_DAVrun
             {
                 foreach (Control control in ServPanelFullGroup.Controls)    // Начинаем перебор всех элементов в контейнере "ServPanelFullGroup"
                 {
-                    if (control is RadioButton && control.Name != "ServGroup4") // Если текущий элемент является "RadioButton" и его имя не равно "ServGroup4"
+                    if (control is RadioButton button && control.Name != "ServGroup4") // Если текущий элемент является "RadioButton" и его имя не равно "ServGroup4"
                     {
-                        RadioButton radioButton = (RadioButton)control; // Присваиваем значение текущего элемента к "radioButton"
-                        radioButton.Checked = false;                    // Убираем точку с элемента
-                        radioButton.Enabled = false;                    // И выключаем его
+                        RadioButton radioButton = button;   // Присваиваем значение текущего элемента к "radioButton"
+                        radioButton.Checked = false;        // Убираем точку с элемента
+                        radioButton.Enabled = false;        // И выключаем его
                     }
                 }
             }
@@ -288,13 +289,13 @@ namespace Admin_DAVrun
             {
                 foreach (Control control in ServPanelFullGroup.Controls)    // Начинаем перебор всех элементов в контейнере "ServPanelFullGroup"
                 {
-                    if (control is RadioButton) // Если текущий элемент является "RadioButton"
+                    if (control is RadioButton button) // Если текущий элемент является "RadioButton"
                     {
                         if (control.Name == "ServSubGroup1")    // Если имя элемента равно "ServSubGroup1"
                         {
                             ServSubGroup1.Checked = true;   // Выбираем самую первую подгруппу
                         }
-                        ((RadioButton)control).Enabled = GetSubGroupEnabledState(control.Name, Connect.config); // Получаем состояние доступности подгруппы для текущего элемента управления и устанавливаем свойство "Enabled" для текущего элемента
+                        button.Enabled = GetSubGroupEnabledState(control.Name, Connect.config); // Получаем состояние доступности подгруппы для текущего элемента управления и устанавливаем свойство "Enabled" для текущего элемента
                     }
                 }
             }
@@ -307,11 +308,11 @@ namespace Admin_DAVrun
             {
                 foreach (Control control in LoadPanelFullGroup.Controls)    // Начинаем перебор всех элементов в контейнере "LoadPanelFullGroup"
                 {
-                    if (control is RadioButton && control.Name != "LoadGroup4") // Если текущий элемент является "RadioButton" и его имя не равно "LoadGroup4"
+                    if (control is RadioButton button && control.Name != "LoadGroup4") // Если текущий элемент является "RadioButton" и его имя не равно "LoadGroup4"
                     {
-                        RadioButton radioButton = (RadioButton)control; // Присваиваем значение текущего элемента к "radioButton"
-                        radioButton.Checked = false;                    // Убираем точку с элемента
-                        radioButton.Enabled = false;                    // И выключаем его
+                        RadioButton radioButton = button;   // Присваиваем значение текущего элемента к "radioButton"
+                        radioButton.Checked = false;        // Убираем точку с элемента
+                        radioButton.Enabled = false;        // И выключаем его
                     }
                 }
             }
@@ -319,13 +320,13 @@ namespace Admin_DAVrun
             {
                 foreach (Control control in LoadPanelFullGroup.Controls)    // Начинаем перебор всех элементов в контейнере "LoadPanelFullGroup"
                 {
-                    if (control is RadioButton) // Если текущий элемент является "RadioButton"
+                    if (control is RadioButton button) // Если текущий элемент является "RadioButton"
                     {
                         if (control.Name == "LoadSubGroup1")    // Если имя элемента равно "LoadSubGroup1"
                         {
                             LoadSubGroup1.Checked = true;   // Выбираем самую первую подгруппу
                         }
-                        ((RadioButton)control).Enabled = GetSubGroupEnabledState(control.Name, Connect.config); // Получаем состояние доступности подгруппы для текущего элемента управления и устанавливаем свойство "Enabled" для текущего элемента
+                        button.Enabled = GetSubGroupEnabledState(control.Name, Connect.config); // Получаем состояние доступности подгруппы для текущего элемента управления и устанавливаем свойство "Enabled" для текущего элемента
                     }
                 }
             }
@@ -460,7 +461,7 @@ namespace Admin_DAVrun
         //Метод вызывается при клике мышкой на панель, вместо перетаскивания файлов (Drag and Drop)
         private void panel4_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())    // Создаём экземпляр класса
+            using (OpenFileDialog openFileDialog = new())    // Создаём экземпляр класса
             {
                 openFileDialog.Multiselect = true;                              // Позволяем выбирать несколько файлов
                 if (openFileDialog.ShowDialog() == DialogResult.OK)             // Проверяем, была ли нажата кнопка "Открыть"
@@ -587,7 +588,7 @@ namespace Admin_DAVrun
                 ClearFileList();    // Очищаем список файлов на панели
 
                 //Создаем панель для файлов, которая будет внутри основной панели
-                Panel filePanel = new Panel
+                Panel filePanel = new()
                 {
                     Location = new Point(10, 45),                                   // Расположение нового окна в панели по координатам
                     Size = new Size(panelFiles.Width - 20, panelFiles.Height - 60), // Высота и ширина нового окна в панели равна высоте и ширине "panelFiles" за вычетом указанных пикселей
@@ -606,7 +607,7 @@ namespace Admin_DAVrun
 
                 foreach (var file in files) // Перебор файлов в цикле
                 {
-                    CheckBox fileCheckBox = new CheckBox    // Для каждого файла создаём новый чекбокс
+                    CheckBox fileCheckBox = new()   // Для каждого файла создаём новый чекбокс
                     {
                         Text = file.Name,                               // Устанавливаем название файла
                         Location = new Point(5, yOffset),               // Расположение на панели
@@ -620,7 +621,7 @@ namespace Admin_DAVrun
                 }
 
                 //Добавление кнопок внутри панели "Выбрать всё" и "Снять выделение"
-                Button btnSelectAll = new Button    // Создаём объект типа кнопка
+                Button btnSelectAll = new() // Создаём объект типа кнопка
                 {
                     Text = "Выделить всё",              // Даём ей название
                     Location = new Point(10, 10),       // Расположение кнопки
@@ -629,7 +630,7 @@ namespace Admin_DAVrun
 
                 btnSelectAll.Click += (s, args) => SetCheckState(true); // Вызываем метод при клике на кнопку
 
-                Button btnDeselectAll = new Button  // Создаём обект типа кнопка
+                Button btnDeselectAll = new()   // Создаём обект типа кнопка
                 {
                     Text = "Снять выделение",                           // Даём ей название
                     Location = new Point(panelFiles.Width / 2 + 5, 10), // Расположение кнопки (половина ширины панели "panelFiles" плюс 5 пикселей)
@@ -915,7 +916,7 @@ namespace Admin_DAVrun
                 ClearFileList();    // Очищаем список файлов на панели
 
                 //Создаем панель для файлов, которая будет внутри основной панели
-                Panel filePanelInstall = new Panel
+                Panel filePanelInstall = new()
                 {
                     Location = new Point(10, 45),                                       // Расположение нового окна в панели по координатам
                     Size = new Size(panelInstall.Width - 20, panelInstall.Height - 60), // Высота и ширина нового окна в панели равна высоте и ширине "panelInstall" за вычетом указанных пикселей
@@ -934,7 +935,7 @@ namespace Admin_DAVrun
 
                 foreach (var file in files) // Перебор файлов в цикле
                 {
-                    CheckBox fileCheckBox = new CheckBox    // Для каждого файла создаём новый чекбокс
+                    CheckBox fileCheckBox = new()   // Для каждого файла создаём новый чекбокс
                     {
                         Text = file.Name,                               // Устанавливаем название файла
                         Location = new Point(5, yOffset),               // Расположение на панели
@@ -958,7 +959,7 @@ namespace Admin_DAVrun
                 }
 
                 //Добавление кнопок внутри панели "Выбрать всё" и "Снять выделение"
-                Button btnSelectAll = new Button    // Создаём объект типа кнопка
+                Button btnSelectAll = new() // Создаём объект типа кнопка
                 {
                     Text = "Выделить всё",              // Даём ей название
                     Location = new Point(10, 10),       // Расположение кнопки
@@ -967,7 +968,7 @@ namespace Admin_DAVrun
 
                 btnSelectAll.Click += (s, args) => SetCheckState(true); // Вызываем метод при клике на кнопку
 
-                Button btnDeselectAll = new Button  // Создаём объект типа кнопка
+                Button btnDeselectAll = new()   // Создаём объект типа кнопка
                 {
                     Text = "Снять выделение",                               // Даём ей название
                     Location = new Point(panelInstall.Width / 2 + 5, 10),   // Расположение кнопки (половина ширины панели "panelInstall" плюс 5 пикселей)

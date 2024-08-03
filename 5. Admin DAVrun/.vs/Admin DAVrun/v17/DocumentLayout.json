@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "D:\\bak\\\u041F\u0440\u043E\u0435\u043A\u0442 DAVrun\\5. Admin DAVrun\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5B805999-7DAA-4EBA-A3CA-658F06B8BC79}|Admin DAVrun\\Admin DAVrun.csproj|d:\\bak\\\u043F\u0440\u043E\u0435\u043A\u0442 davrun\\5. admin davrun\\admin davrun\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{5B805999-7DAA-4EBA-A3CA-658F06B8BC79}|Admin DAVrun\\Admin DAVrun.csproj|D:\\bak\\\u041F\u0440\u043E\u0435\u043A\u0442 DAVrun\\5. Admin DAVrun\\admin davrun\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5B805999-7DAA-4EBA-A3CA-658F06B8BC79}|Admin DAVrun\\Admin DAVrun.csproj|solutionrelative:admin davrun\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -28,9 +28,9 @@
               "RelativeDocumentMoniker": "Admin DAVrun\\Program.cs",
               "ToolTip": "D:\\bak\\\u041F\u0440\u043E\u0435\u043A\u0442 DAVrun\\5. Admin DAVrun\\Admin DAVrun\\Program.cs",
               "RelativeToolTip": "Admin DAVrun\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAyAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-05T12:46:22Z",
+              "WhenOpened": "2024-08-01T11:15:21.749Z",
               "EditorCaption": ""
             },
             {
@@ -43,7 +43,7 @@
               "RelativeToolTip": "Admin DAVrun\\Connect.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-05T12:46:12.385Z",
+              "WhenOpened": "2024-08-01T09:03:56.756Z",
               "EditorCaption": ""
             }
           ]
