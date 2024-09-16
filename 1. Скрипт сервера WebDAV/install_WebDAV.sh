@@ -6,7 +6,7 @@
 
 # Copyright (c) 2024 Otto
 # Автор: Otto
-# Версия: 02.08.24
+# Версия: 16.09.24
 # GitHub страница:  https://github.com/Otto17/DAVrun
 # GitFlic страница: https://gitflic.ru/project/otto/davrun
 
@@ -212,7 +212,7 @@ Alias /webdav /var/www/webdav
   RewriteRule ^(.*)$ https://%{HTTP_HOST}/webdav [R=301,L]
 
 
-  <Location /webdav>
+  <Directory /var/www/webdav>
       # Включаем WebDAV
       DAV On
       # Требуем использование SSL
@@ -225,7 +225,7 @@ Alias /webdav /var/www/webdav
       AuthUserFile /etc/apache2/webdav.passwd
       # Требуем ввод логина и пароля
       Require valid-user
-  </Location>
+  </Directory>
 
 </VirtualHost>
 
