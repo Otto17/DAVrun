@@ -1,81 +1,81 @@
-;Сценарий, установки программы "DAVrun" создан через Inno Setup v6.3.3
+;РЎС†РµРЅР°СЂРёР№, СѓСЃС‚Р°РЅРѕРІРєРё РїСЂРѕРіСЂР°РјРјС‹ "DAVrun" СЃРѕР·РґР°РЅ С‡РµСЂРµР· Inno Setup v6.3.3
 
 
-;Данная программа является свободным программным обеспечением, распространяющимся по лицензии MIT.
-;Копия лицензии: https://opensource.org/licenses/MIT
+;Р”Р°РЅРЅР°СЏ РїСЂРѕРіСЂР°РјРјР° СЏРІР»СЏРµС‚СЃСЏ СЃРІРѕР±РѕРґРЅС‹Рј РїСЂРѕРіСЂР°РјРјРЅС‹Рј РѕР±РµСЃРїРµС‡РµРЅРёРµРј, СЂР°СЃРїСЂРѕСЃС‚СЂР°РЅСЏСЋС‰РёРјСЃСЏ РїРѕ Р»РёС†РµРЅР·РёРё MIT.
+;РљРѕРїРёСЏ Р»РёС†РµРЅР·РёРё: https://opensource.org/licenses/MIT
 
 ;Copyright (c) 2024 Otto
-;Автор: Otto
-;Версия: 02.08.24
-;GitHub страница:  https://github.com/Otto17/DAVrun
-;GitFlic страница: https://gitflic.ru/project/otto/davrun
+;РђРІС‚РѕСЂ: Otto
+;Р’РµСЂСЃРёСЏ: 05.12.24
+;GitHub СЃС‚СЂР°РЅРёС†Р°:  https://github.com/Otto17/DAVrun
+;GitFlic СЃС‚СЂР°РЅРёС†Р°: https://gitflic.ru/project/otto/davrun
 
-;г. Омск 2024
+;Рі. РћРјСЃРє 2024
 
 
 // --------------------------- //
 
-//Ниже используется код скрипта "CodeDependencies.iss", я его урезал, и он использует только x64 архитектура, так же вырезаны все остальные установщики библиотек, кроме "Visual C++ 2015-2022 Redistributable".
-//Автор скрипта "CodeDependencies.iss" - "DomGries", ссылка на страницу автора "https://github.com/DomGries/InnoDependencyInstaller/tree/master".
-//Код скрипта "CodeDependencies.iss" распространяется по лицензии "The Code Project Open License (CPOL) 1.02".
+//РќРёР¶Рµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РєРѕРґ СЃРєСЂРёРїС‚Р° "CodeDependencies.iss", СЏ РµРіРѕ СѓСЂРµР·Р°Р», Рё РѕРЅ РёСЃРїРѕР»СЊР·СѓРµС‚ С‚РѕР»СЊРєРѕ x64 Р°СЂС…РёС‚РµРєС‚СѓСЂР°, С‚Р°Рє Р¶Рµ РІС‹СЂРµР·Р°РЅС‹ РІСЃРµ РѕСЃС‚Р°Р»СЊРЅС‹Рµ СѓСЃС‚Р°РЅРѕРІС‰РёРєРё Р±РёР±Р»РёРѕС‚РµРє, РєСЂРѕРјРµ "Visual C++ 2015-2022 Redistributable".
+//РђРІС‚РѕСЂ СЃРєСЂРёРїС‚Р° "CodeDependencies.iss" - "DomGries", СЃСЃС‹Р»РєР° РЅР° СЃС‚СЂР°РЅРёС†Сѓ Р°РІС‚РѕСЂР° "https://github.com/DomGries/InnoDependencyInstaller/tree/master".
+//РљРѕРґ СЃРєСЂРёРїС‚Р° "CodeDependencies.iss" СЂР°СЃРїСЂРѕСЃС‚СЂР°РЅСЏРµС‚СЃСЏ РїРѕ Р»РёС†РµРЅР·РёРё "The Code Project Open License (CPOL) 1.02".
 
-//ЕСЛИ ДАННАЯ ЛИЦЕНЗИЯ ВАМ НЕ ПОДХОДИТ, ТОГДА УДАЛИТЕ, ЛИБО ЗАКОММЕНТИРУЙТЕ ЭТУ СТРОКУ ИЗ СКРИПТА:
+//Р•РЎР›Р Р”РђРќРќРђРЇ Р›РР¦Р•РќР—РРЇ Р’РђРњ РќР• РџРћР”РҐРћР”РРў, РўРћР“Р”Рђ РЈР”РђР›РРўР•, Р›РР‘Рћ Р—РђРљРћРњРњР•РќРўРР РЈР™РўР• Р­РўРЈ РЎРўР РћРљРЈ РР— РЎРљР РРџРўРђ:
 #include "CodeDependencies.iss"
-//И установите вручную "Visual C++ 2015-2022 Redistributable" по ссылке с официального сайта Microsoft: "https://learn.microsoft.com/ru-ru/cpp/windows/latest-supported-vc-redist?view=msvc-170"
+//Р СѓСЃС‚Р°РЅРѕРІРёС‚Рµ РІСЂСѓС‡РЅСѓСЋ "Visual C++ 2015-2022 Redistributable" РїРѕ СЃСЃС‹Р»РєРµ СЃ РѕС„РёС†РёР°Р»СЊРЅРѕРіРѕ СЃР°Р№С‚Р° Microsoft: "https://learn.microsoft.com/ru-ru/cpp/windows/latest-supported-vc-redist?view=msvc-170"
 
 // --------------------------- //
 
 
-; Имя приложения
+; РРјСЏ РїСЂРёР»РѕР¶РµРЅРёСЏ
 #define MyAppName "DAVrun"
-; Версия приложения
+; Р’РµСЂСЃРёСЏ РїСЂРёР»РѕР¶РµРЅРёСЏ
 #define MyAppVersion "02.08.24"
-;Издатель приложения
+;РР·РґР°С‚РµР»СЊ РїСЂРёР»РѕР¶РµРЅРёСЏ
 #define MyAppPublisher "Otto"
-; Место сохранения скомпилированного установочного фала
+; РњРµСЃС‚Рѕ СЃРѕС…СЂР°РЅРµРЅРёСЏ СЃРєРѕРјРїРёР»РёСЂРѕРІР°РЅРЅРѕРіРѕ СѓСЃС‚Р°РЅРѕРІРѕС‡РЅРѕРіРѕ С„Р°Р»Р°
 #define MyFolderOutput "."
-; Папка с файлами, которые будут собраны в установочном файле
+; РџР°РїРєР° СЃ С„Р°Р№Р»Р°РјРё, РєРѕС‚РѕСЂС‹Рµ Р±СѓРґСѓС‚ СЃРѕР±СЂР°РЅС‹ РІ СѓСЃС‚Р°РЅРѕРІРѕС‡РЅРѕРј С„Р°Р№Р»Рµ
 #define MySourceFile ".\build\DAVrun\*"
-; Файл лицензии
+; Р¤Р°Р№Р» Р»РёС†РµРЅР·РёРё
 #define MyLicense ".\build\DAVrun\LICENSE.txt"
-; Иконка установочного файла после компиляции
+; РРєРѕРЅРєР° СѓСЃС‚Р°РЅРѕРІРѕС‡РЅРѕРіРѕ С„Р°Р№Р»Р° РїРѕСЃР»Рµ РєРѕРјРїРёР»СЏС†РёРё
 #define MyIconSetupOutput ".\build\icon_Setup.ico"
-; Имя файла установщика после компиляции
+; РРјСЏ С„Р°Р№Р»Р° СѓСЃС‚Р°РЅРѕРІС‰РёРєР° РїРѕСЃР»Рµ РєРѕРјРїРёР»СЏС†РёРё
 #define MySetupOutput "Setup_DAVrun"
-; Место куда будем устанавливать программу при запуске Setup файла
+; РњРµСЃС‚Рѕ РєСѓРґР° Р±СѓРґРµРј СѓСЃС‚Р°РЅР°РІР»РёРІР°С‚СЊ РїСЂРѕРіСЂР°РјРјСѓ РїСЂРё Р·Р°РїСѓСЃРєРµ Setup С„Р°Р№Р»Р°
 #define MySetupFilePath "C:\Program Files"
 
 
-; ДАННЫЕ ДЛЯ ПОДКЛЮЧЕНИЯ К СЕРВЕРУ
-; Включить автоматическое создание конфига для программы "DAVrun" (true - включить, false - выключить)
+; Р”РђРќРќР«Р• Р”Р›РЇ РџРћР”РљР›Р®Р§Р•РќРРЇ Рљ РЎР•Р Р’Р•Р РЈ
+; Р’РєР»СЋС‡РёС‚СЊ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ СЃРѕР·РґР°РЅРёРµ РєРѕРЅС„РёРіР° РґР»СЏ РїСЂРѕРіСЂР°РјРјС‹ "DAVrun" (true - РІРєР»СЋС‡РёС‚СЊ, false - РІС‹РєР»СЋС‡РёС‚СЊ)
 #define ENABLE true
-; Создать конфиг файл от пользователя "LocalSystem"(СИСТЕМА) (true - создать от "СИСТЕМА", false - создать от текущего пользователя)
+; РЎРѕР·РґР°С‚СЊ РєРѕРЅС„РёРі С„Р°Р№Р» РѕС‚ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ "LocalSystem"(РЎРРЎРўР•РњРђ) (true - СЃРѕР·РґР°С‚СЊ РѕС‚ "РЎРРЎРўР•РњРђ", false - СЃРѕР·РґР°С‚СЊ РѕС‚ С‚РµРєСѓС‰РµРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ)
 #define CreateConfLocalSystem false
-; Хост
+; РҐРѕСЃС‚
 #define HOST      "https://77.77.77.77:7777/webdav/"
-; Логин
+; Р›РѕРіРёРЅ
 #define USERNAME  "User"
-; Пароль
+; РџР°СЂРѕР»СЊ
 #define PASSWORD  "Password"
-; Имя сертификата с расширением
+; РРјСЏ СЃРµСЂС‚РёС„РёРєР°С‚Р° СЃ СЂР°СЃС€РёСЂРµРЅРёРµРј
 #define CERT      "cert.crt"
-; Каталог ожидания установок на сервере
+; РљР°С‚Р°Р»РѕРі РѕР¶РёРґР°РЅРёСЏ СѓСЃС‚Р°РЅРѕРІРѕРє РЅР° СЃРµСЂРІРµСЂРµ
 #define FILESETUP "Points"
-; Кол-во символов (число от 0 до 14) для обрезки символов от начала имени ПК
+; РљРѕР»-РІРѕ СЃРёРјРІРѕР»РѕРІ (С‡РёСЃР»Рѕ РѕС‚ 0 РґРѕ 14) РґР»СЏ РѕР±СЂРµР·РєРё СЃРёРјРІРѕР»РѕРІ РѕС‚ РЅР°С‡Р°Р»Р° РёРјРµРЅРё РџРљ
 #define SYMBOLCUT 7
 
 
 [Setup]
-; ПРИМЕЧАНИЕ: Значение AppID однозначно идентифицирует это приложение. Не используйте одно и то же значение AppID в установщиках для других приложений.
-; ( Чтобы сгенерировать новый GUID, нажмите Tools |  Generate GUID в среде IDE )
+; РџР РРњР•Р§РђРќРР•: Р—РЅР°С‡РµРЅРёРµ AppID РѕРґРЅРѕР·РЅР°С‡РЅРѕ РёРґРµРЅС‚РёС„РёС†РёСЂСѓРµС‚ СЌС‚Рѕ РїСЂРёР»РѕР¶РµРЅРёРµ. РќРµ РёСЃРїРѕР»СЊР·СѓР№С‚Рµ РѕРґРЅРѕ Рё С‚Рѕ Р¶Рµ Р·РЅР°С‡РµРЅРёРµ AppID РІ СѓСЃС‚Р°РЅРѕРІС‰РёРєР°С… РґР»СЏ РґСЂСѓРіРёС… РїСЂРёР»РѕР¶РµРЅРёР№.
+; ( Р§С‚РѕР±С‹ СЃРіРµРЅРµСЂРёСЂРѕРІР°С‚СЊ РЅРѕРІС‹Р№ GUID, РЅР°Р¶РјРёС‚Рµ Tools |  Generate GUID РІ СЃСЂРµРґРµ IDE )
 AppId={{F64A2126-4A3C-4CEF-830B-7E882F6097D1}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 DefaultDirName={#MySetupFilePath}\{#MyAppName}
-; Отключаем страницу выбора папки установки - DisableDirPage=yes
+; РћС‚РєР»СЋС‡Р°РµРј СЃС‚СЂР°РЅРёС†Сѓ РІС‹Р±РѕСЂР° РїР°РїРєРё СѓСЃС‚Р°РЅРѕРІРєРё - DisableDirPage=yes
 DisableDirPage=yes
-; Отключаем создание группы в Меню ПУСК
+; РћС‚РєР»СЋС‡Р°РµРј СЃРѕР·РґР°РЅРёРµ РіСЂСѓРїРїС‹ РІ РњРµРЅСЋ РџРЈРЎРљ
 DisableProgramGroupPage=yes
 LicenseFile={#MyLicense}
 OutputDir={#MyFolderOutput}
@@ -87,75 +87,75 @@ SolidCompression=yes
 WizardStyle=modern
 PrivilegesRequired=admin
 ArchitecturesInstallIn64BitMode=x64os
-; Отключаем предложение перезагрузить компьютер после установки программы
+; РћС‚РєР»СЋС‡Р°РµРј РїСЂРµРґР»РѕР¶РµРЅРёРµ РїРµСЂРµР·Р°РіСЂСѓР·РёС‚СЊ РєРѕРјРїСЊСЋС‚РµСЂ РїРѕСЃР»Рµ СѓСЃС‚Р°РЅРѕРІРєРё РїСЂРѕРіСЂР°РјРјС‹
 RestartIfNeededByRun=no
 
 
 [Languages]
-; Язык установщика
+; РЇР·С‹Рє СѓСЃС‚Р°РЅРѕРІС‰РёРєР°
 Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 
 
 [Files]
 Source: "{#MySourceFile}"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-; ПРИМЕЧАНИЕ: Не используйте "Flags: ignoreversion" для любых общих системных файлов
+; РџР РРњР•Р§РђРќРР•: РќРµ РёСЃРїРѕР»СЊР·СѓР№С‚Рµ "Flags: ignoreversion" РґР»СЏ Р»СЋР±С‹С… РѕР±С‰РёС… СЃРёСЃС‚РµРјРЅС‹С… С„Р°Р№Р»РѕРІ
 
 
 [Icons]
-; Не создаём группу в Меню ПУСК 
+; РќРµ СЃРѕР·РґР°С‘Рј РіСЂСѓРїРїСѓ РІ РњРµРЅСЋ РџРЈРЎРљ 
 
 
 [Run]
-; Добавляем в белый список Защитника Windows путь "C:\ProgramData\DAVrun", что бы он не ругался на самораспаковывающиеся архивы
+; Р”РѕР±Р°РІР»СЏРµРј РІ Р±РµР»С‹Р№ СЃРїРёСЃРѕРє Р—Р°С‰РёС‚РЅРёРєР° Windows РїСѓС‚СЊ "C:\ProgramData\DAVrun", С‡С‚Рѕ Р±С‹ РѕРЅ РЅРµ СЂСѓРіР°Р»СЃСЏ РЅР° СЃР°РјРѕСЂР°СЃРїР°РєРѕРІС‹РІР°СЋС‰РёРµСЃСЏ Р°СЂС…РёРІС‹
 Filename: "{cmd}"; Parameters: "/C powershell -Command Add-MpPreference -ExclusionPath ""C:\ProgramData\DAVrun"""; Flags: runhidden
-; Создаём папку в ProgramData
+; РЎРѕР·РґР°С‘Рј РїР°РїРєСѓ РІ ProgramData
 Filename: "{cmd}"; Parameters: "/C md C:\ProgramData\DAVrun"; Flags: runhidden
-; Меняем владельца на "Все" для папки
-Filename: "{cmd}"; Parameters: "/C icacls C:\ProgramData\DAVrun /setowner ""Все"" /T"; Flags: runhidden
-; Добавляем полные права пользователям "Все" и "Пользователи"
-Filename: "{cmd}"; Parameters: "/C icacls C:\ProgramData\DAVrun /grant:r ""все"":(OI)(CI)F /T"; Flags: runhidden
-Filename: "{cmd}"; Parameters: "/C icacls C:\ProgramData\DAVrun /grant:r ""Пользователи"":(OI)(CI)F /T"; Flags: runhidden
+; РњРµРЅСЏРµРј РІР»Р°РґРµР»СЊС†Р° РЅР° "Р’СЃРµ" РґР»СЏ РїР°РїРєРё
+Filename: "{cmd}"; Parameters: "/C icacls C:\ProgramData\DAVrun /setowner ""Р’СЃРµ"" /T"; Flags: runhidden
+; Р”РѕР±Р°РІР»СЏРµРј РїРѕР»РЅС‹Рµ РїСЂР°РІР° РїРѕР»СЊР·РѕРІР°С‚РµР»СЏРј "Р’СЃРµ" Рё "РџРѕР»СЊР·РѕРІР°С‚РµР»Рё"
+Filename: "{cmd}"; Parameters: "/C icacls C:\ProgramData\DAVrun /grant:r ""РІСЃРµ"":(OI)(CI)F /T"; Flags: runhidden
+Filename: "{cmd}"; Parameters: "/C icacls C:\ProgramData\DAVrun /grant:r ""РџРѕР»СЊР·РѕРІР°С‚РµР»Рё"":(OI)(CI)F /T"; Flags: runhidden
 
-; Даём полные права папке с установленными программами
-Filename: "{cmd}"; Parameters: "/C icacls ""C:\Program Files\DAVrun"" /grant:r ""Пользователи"":(OI)(CI)F /T"; Flags: runhidden
+; Р”Р°С‘Рј РїРѕР»РЅС‹Рµ РїСЂР°РІР° РїР°РїРєРµ СЃ СѓСЃС‚Р°РЅРѕРІР»РµРЅРЅС‹РјРё РїСЂРѕРіСЂР°РјРјР°РјРё
+Filename: "{cmd}"; Parameters: "/C icacls ""C:\Program Files\DAVrun"" /grant:r ""РџРѕР»СЊР·РѕРІР°С‚РµР»Рё"":(OI)(CI)F /T"; Flags: runhidden
 
-; Если включено создание конфига, тогда после установки проверяем значение "CreateConfLocalSystem" и создаём зашифрованный конфиг файл от имени "СИСТЕМА" или текущего пользователя
+; Р•СЃР»Рё РІРєР»СЋС‡РµРЅРѕ СЃРѕР·РґР°РЅРёРµ РєРѕРЅС„РёРіР°, С‚РѕРіРґР° РїРѕСЃР»Рµ СѓСЃС‚Р°РЅРѕРІРєРё РїСЂРѕРІРµСЂСЏРµРј Р·РЅР°С‡РµРЅРёРµ "CreateConfLocalSystem" Рё СЃРѕР·РґР°С‘Рј Р·Р°С€РёС„СЂРѕРІР°РЅРЅС‹Р№ РєРѕРЅС„РёРі С„Р°Р№Р» РѕС‚ РёРјРµРЅРё "РЎРРЎРўР•РњРђ" РёР»Рё С‚РµРєСѓС‰РµРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
 #if ENABLE
   #if CreateConfLocalSystem
-    ; Создание конфига от имени "СИСТЕМА"
+    ; РЎРѕР·РґР°РЅРёРµ РєРѕРЅС„РёРіР° РѕС‚ РёРјРµРЅРё "РЎРРЎРўР•РњРђ"
     Filename: "{app}\Launch_LocalSystem.exe"; Parameters: """DAVrun.exe {#HOST} {#USERNAME} {#PASSWORD} {#CERT} {#FILESETUP} {#SYMBOLCUT}"""; Flags: runascurrentuser waituntilterminated
   #else
-    ; Создание конфига от текущего пользователя
+    ; РЎРѕР·РґР°РЅРёРµ РєРѕРЅС„РёРіР° РѕС‚ С‚РµРєСѓС‰РµРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
     Filename: "{app}\DAVrun.exe"; Parameters: """{#HOST}"" ""{#USERNAME}"" ""{#PASSWORD}"" ""{#CERT}"" ""{#FILESETUP}"" {#SYMBOLCUT}"; Flags: runascurrentuser waituntilterminated
   #endif
 #endif
 
 
-; Затем запускаем службу с ключом "-is"
+; Р—Р°С‚РµРј Р·Р°РїСѓСЃРєР°РµРј СЃР»СѓР¶Р±Сѓ СЃ РєР»СЋС‡РѕРј "-is"
 Filename: "{app}\SERVICE-DAVrun.exe"; Parameters: "-is"; Flags: runascurrentuser waituntilterminated
 
 
 [UninstallRun]
-; Перед удалением DAVrun, останавливаем и удаляем службу "DAVrun" с ключом "-sd"
+; РџРµСЂРµРґ СѓРґР°Р»РµРЅРёРµРј DAVrun, РѕСЃС‚Р°РЅР°РІР»РёРІР°РµРј Рё СѓРґР°Р»СЏРµРј СЃР»СѓР¶Р±Сѓ "DAVrun" СЃ РєР»СЋС‡РѕРј "-sd"
 Filename: "{app}\SERVICE-DAVrun.exe"; Parameters: "-sd"; Flags: runascurrentuser waituntilterminated; RunOnceId: CleanupSDDAVrun
 
-; Удаляем папку для темпов DAVrun из ProgramData и Program Files
+; РЈРґР°Р»СЏРµРј РїР°РїРєСѓ РґР»СЏ С‚РµРјРїРѕРІ DAVrun РёР· ProgramData Рё Program Files
 Filename: "{cmd}"; Parameters: "/c rmdir /S /Q C:\ProgramData\DAVrun"; Flags: runhidden; RunOnceId: CleanupPDDAVrun
-; Для надёжности удаляем папку (если в нём создавались файлы из программ для получения имени ПК)
+; Р”Р»СЏ РЅР°РґС‘Р¶РЅРѕСЃС‚Рё СѓРґР°Р»СЏРµРј РїР°РїРєСѓ (РµСЃР»Рё РІ РЅС‘Рј СЃРѕР·РґР°РІР°Р»РёСЃСЊ С„Р°Р№Р»С‹ РёР· РїСЂРѕРіСЂР°РјРј РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РёРјРµРЅРё РџРљ)
 Filename: "{cmd}"; Parameters: "/c rmdir /S /Q ""C:\Program Files\DAVrun"""; Flags: runhidden; RunOnceId: CleanupPFDAVrun
-; Удаляем из белого списка Защитника Windows путь "C:\ProgramData\DAVrun"
+; РЈРґР°Р»СЏРµРј РёР· Р±РµР»РѕРіРѕ СЃРїРёСЃРєР° Р—Р°С‰РёС‚РЅРёРєР° Windows РїСѓС‚СЊ "C:\ProgramData\DAVrun"
 Filename: "{cmd}"; Parameters: "/C powershell -Command Remove-MpPreference -ExclusionPath ""C:\ProgramData\DAVrun"""; Flags: runhidden; RunOnceId: CleanupPSDAVrun
 
 
 [Code]
-// Выбираем по умолчанию "Я принимаю условия соглашения" на странице с лицензией
+// Р’С‹Р±РёСЂР°РµРј РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ "РЇ РїСЂРёРЅРёРјР°СЋ СѓСЃР»РѕРІРёСЏ СЃРѕРіР»Р°С€РµРЅРёСЏ" РЅР° СЃС‚СЂР°РЅРёС†Рµ СЃ Р»РёС†РµРЅР·РёРµР№
 procedure InitializeWizard;
 begin
   WizardForm.LicenseAcceptedRadio.Checked := True;
 end;
 
 
-// Выделяем и выбираем по умолчанию "Нет, я произведу перезагрузку позже" на странице завершения
+// Р’С‹РґРµР»СЏРµРј Рё РІС‹Р±РёСЂР°РµРј РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ "РќРµС‚, СЏ РїСЂРѕРёР·РІРµРґСѓ РїРµСЂРµР·Р°РіСЂСѓР·РєСѓ РїРѕР·Р¶Рµ" РЅР° СЃС‚СЂР°РЅРёС†Рµ Р·Р°РІРµСЂС€РµРЅРёСЏ
 procedure CurPageChanged(CurPageID: Integer);
 begin
   if CurPageID = wpFinished then

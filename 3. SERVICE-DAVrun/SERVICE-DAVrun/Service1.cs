@@ -41,9 +41,16 @@ namespace SERVICE_DAVrun
             {
                 WriteToLogFile("Служба установлена и успешно запущена.");  // Пишем лог
 
-                timer = new Timer(START_TIMER);     // Создаём таймер
-                timer.Elapsed += OnTimerElapsed;    // Добавляем обработчик событий
-                timer.Start();                      // Запускаем таймер
+                // Таймер для начального запуска через 10 секунд
+                Timer initialTimer = new Timer(10000); // 10 секунд (10 000 миллисекунд)
+                initialTimer.Elapsed += (sender, e) =>
+                {
+                    initialTimer.Stop();            // Останавливаем начальный таймер
+                    initialTimer.Dispose();         // Уничтожаем начальный таймер
+                    OnTimerElapsed(sender, null);   // Выполняем начальный запуск
+                    StartMainTimer();               // Запускаем основной таймер
+                };
+                initialTimer.Start();
             }
             catch (Exception ex)
             {
@@ -66,17 +73,42 @@ namespace SERVICE_DAVrun
             }
         }
 
+        // Таймер для последующих запусков через каждые "START_TIMER" минут
+        private void StartMainTimer()
+        {
+            timer = new Timer(START_TIMER);     // Создаём таймер
+            timer.Elapsed += OnTimerElapsed;    // Добавляем обработчик событий
+            timer.Start();                      // Запускаем таймер
+        }
+
         //Функция обработчик для запуска программы по таймеру
         private void OnTimerElapsed(object sender, ElapsedEventArgs e)
         {
             try
             {
-                Process.Start(PROGRAM_PATH);    // Запускаем процесс при срабатываении таймера
-               // WriteToLogFile("Программа запущена.");  // ДЛЯ ОТЛАДКИ
+                // Завершаем все запущенные процессы DAVrun.exe
+                var processes = Process.GetProcessesByName("DAVrun");
+                foreach (var process in processes)
+                {
+                    try
+                    {
+                        process.Kill();
+                        process.WaitForExit(); // Ожидание завершения процесса
+                        // WriteToLogFile($"Процесс {process.Id} DAVrun.exe был завершён.");   // ДЛЯ ОТЛАДКИ
+                    }
+                    catch (Exception ex)
+                    {
+                        WriteToLogFile($"Не удалось завершить процесс {process.Id}: {ex.Message}");
+                    }
+                }
+
+                // Запускаем новый процесс DAVrun.exe
+                Process.Start(PROGRAM_PATH);
+                // WriteToLogFile("Новая копия DAVrun.exe была успешно запущена."); // ДЛЯ ОТЛАДКИ
             }
             catch (Exception ex)
             {
-                WriteToLogFile($"Ошибка при запуске программы: {ex.Message}");  // Пишем ошибку в лог
+                WriteToLogFile($"Ошибка при запуске программы: {ex.Message}");
             }
         }
 
