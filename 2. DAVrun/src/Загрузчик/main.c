@@ -12,7 +12,7 @@
 
 	Copyright (c) 2024 Otto
 	Автор: Otto
-	Версия: 05.08.24
+	Версия: 08.12.24
 	GitHub страница:  https://github.com/Otto17/DAVrun
 	GitFlic страница: https://gitflic.ru/project/otto/davrun
 
@@ -22,8 +22,8 @@
 
 //НАСТРОЙКИ
 //Подключаем код для шифрования конфиг файла (нужное раскомментировать)
-#include "soft_Encryption.h"        // Шифрование без привязки к ПК (безопасность ниже, но конфиг можно переносить на другие компьютеры)
-//#include "strong_Encryption.h"    // Шифрование c привязкой к ПК (безопасность на много выше, но конфиг НЕ переносим на другие компьютеры)
+//#include "soft_Encryption.h"        // Шифрование без привязки к ПК (безопасность ниже, но конфиг можно переносить на другие компьютеры)
+#include "strong_Encryption.h"    // Шифрование c привязкой к ПК (безопасность на много выше, но конфиг НЕ переносим на другие компьютеры)
 
 //Данный блок будет доступен, если раскомментирована "soft_Encryption.h"
 #ifdef SOFT_ENCRYPTION_H
@@ -490,6 +490,15 @@ int downloadFile(const char* host, const char* username, const char* passwd, con
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);              // Установка файла, в который будут записываться полученные данные
         curl_easy_setopt(curl, CURLOPT_CAINFO, curlCrt);            // Путь к файлу сертификата
 
+        // Дополнительные опции для улучшения надежности и производительности загрузки
+        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);     // Следование перенаправлениям
+        curl_easy_setopt(curl, CURLOPT_FAILONERROR, 1L);        // Прерывание загрузки при ошибке HTTP
+        curl_easy_setopt(curl, CURLOPT_NOSIGNAL, 1L);           // Отключение использования сигналов для многопоточности
+        curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 30L);    // Таймаут соединения (30 секунд)
+        curl_easy_setopt(curl, CURLOPT_LOW_SPEED_LIMIT, 100L);  // Разрешённая низкая скорость передачи данных от (100 байт в секунду)
+        curl_easy_setopt(curl, CURLOPT_LOW_SPEED_TIME, 300L);   // Время ожидания низкой скорости (300 секунд)
+
+
         res = curl_easy_perform(curl);  // Выполняем запрос с помощью libcurl, результат пишем в "res"
         fclose(fp);                     // Закрываем файл
 
@@ -690,7 +699,7 @@ int main(int argc, char *argv[]) {
             printf("Для удаления конфига использовать: DAVrun.exe \"Delete Config в любом регистре\".\n\n");
 
             setConsoleTextColor(FOREGROUND_BLUE | FOREGROUND_INTENSITY);     // Ярко синий цвет
-            printf("Пример: DAVrun.exe \"https://77.77.77.77:7777/webdaw/\" \"User\" \"Password\" \"cert.crt\" \"Points\" 7\n");
+            printf("Пример: DAVrun.exe \"https://77.77.77.77:7777/webdav/\" \"User\" \"Password\" \"cert.crt\" \"Points\" 7\n");
             printf("Пример: DAVrun.exe \"DELETE CONFIG\"\n\n");
             
             setConsoleTextColor(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);   // Ярко жёлтый цвет
