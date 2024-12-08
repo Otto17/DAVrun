@@ -6,7 +6,7 @@
 
 ;Copyright (c) 2024 Otto
 ;Автор: Otto
-;Версия: 05.12.24
+;Версия: 08.12.24
 ;GitHub страница:  https://github.com/Otto17/DAVrun
 ;GitFlic страница: https://gitflic.ru/project/otto/davrun
 
@@ -29,7 +29,7 @@
 ; Имя приложения
 #define MyAppName "DAVrun"
 ; Версия приложения
-#define MyAppVersion "02.08.24"
+#define MyAppVersion "08.12.24"
 ;Издатель приложения
 #define MyAppPublisher "Otto"
 ; Место сохранения скомпилированного установочного фала
